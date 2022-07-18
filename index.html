@@ -6,7 +6,7 @@
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
   </head>
   <body>
-    <h1>Попыт 1</h1>
+    <h1>Попыт 2</h1>
 <img src="" alt="photo" class="img">
 
 <script type="text/javascript">
@@ -17,9 +17,8 @@
   });
   VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239435' ,v:'5.131'}, function(data) {
   if(!data.error) {
-    image.src = "img/1.jpg";
+    image.src = data.response[0]['sizes'][0]['url'];
     console.log(data);
-    alert("1");
   }
 });
 </script>
