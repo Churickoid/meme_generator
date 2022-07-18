@@ -6,7 +6,7 @@
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
   </head>
   <body>
-    <h1>Попыт 4</h1>
+    <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
 <img src="" alt="photo" class="img">
 
 <script type="text/javascript">
@@ -15,19 +15,20 @@
   VK.init({
     apiId: 8221134
   });
-  VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239435' ,v:'5.131'}, function(data) {
+  let id = 127+Math.floor(Math.random() * 300);
+  alert(id);
+  VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239'+id ,v:'5.131'}, function(data) {
   let height = 0;
-  let id = 0;
+  let num = 0;
   size = data.response[0]['sizes'];
     if(!data.error) {
     for (let i = 0; i < size.length; i++) {
       if(size[i]['height']>height){
         height= size[i]['height'];
-        id = i;
+        num = i;
       }
     }
-    image.src = data.response[0]['sizes'][id]['url'];
-    console.log(data);
+    image.src = data.response[0]['sizes'][num]['url'];
   }
 });
 </script>
