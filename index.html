@@ -11,12 +11,16 @@
 
 <script type="text/javascript">
   const image = document.querySelector(".img");
+  token;
 // url = "https://api.vk.com/method/photos.getById?photos=514918087_457239435&access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8&v=5.131";
   VK.init({
     apiId: 8221134
   });
+  VK.Api.call('photos.getById', {client_id:8221134, client_secret:'dgBrXZas6K0Y3mMHzGfO',v:'5.131',grant_type:'client_credentials'}, function(data) {
+  token = data.access_token;
+});
   let id = 127+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:"194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8",v:'5.131'}, function(data) {
+  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token: token,v:'5.131'}, function(data) {
   let height = 0;
   let num = 0;
   size = data.response[0]['sizes'];
