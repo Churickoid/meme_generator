@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Главная</title>
+  
+  </head>
+  <body>
+<img src="" alt="photo" class="img">
+<script>
+  const image = document.querySelector(".img")
+  const url = "https://api.vk.com/method/photos.getById?photos=514918087_457239435&access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8&v=5.131";
+  const url2 = "https://aws.random.cat/meow"
+  async function fetchHandler() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    image.src = data.file;
+  } catch (error) {
+    console.log(error);
+  }
+}
+  fetchHandler();
+</script>
+  </body>
+</html>
