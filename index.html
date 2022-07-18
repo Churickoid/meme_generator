@@ -20,7 +20,7 @@
   let id = 0;
   size = data.response[0]['sizes'];
     if(!data.error) {
-    for (let i = 0; index < data.response[0]['sizes'].length; i++) {
+    for (let i = 0; i < size.length; i++) {
       if(size[i]['height']>height){
         height= size[i]['height'];
         id = i;
