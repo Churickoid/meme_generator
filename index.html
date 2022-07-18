@@ -16,7 +16,8 @@
     apiId: 8221134
   });
   let id = 127+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239'+id ,v:'5.131'}, function(data) {
+
+  VK.Api.call('photos.getById', {photos:'514918087_457239'+id ,v:'5.131'}, function(data) {
   let height = 0;
   let num = 0;
   size = data.response[0]['sizes'];
@@ -27,7 +28,8 @@
         num = i;
       }
     }
-    image.src = data.response[0]['sizes'][num]['url'];
+    alert(size[num]['url']);
+    image.src = size[num]['url'];
   }
 });
 </script>
