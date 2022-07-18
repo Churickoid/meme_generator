@@ -26,13 +26,12 @@
         height= size[i]['height'];
         num = i;
       }
-      alert(size[num]['url']);
-    image.src = size[num]['url'];
     }
-    else{
+    alert(size[num]['url']);
+    image.src = size[num]['url'];
+  }
+  else{
     console.log(data.error);
-    }  
-    
   }
 });
 </script>
