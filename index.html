@@ -10,13 +10,14 @@
 <img src="" alt="photo" class="img">
 
 <script type="text/javascript">
+  const image = document.querySelector(".img");
 // url = "https://api.vk.com/method/photos.getById?photos=514918087_457239435&access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8&v=5.131";
   VK.init({
     apiId: 8221134
   });
-  VK.Api.call('photos.getById', {photos:"514918087_457239435",access_token: "194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8" ,v:"5.131"}, function(r) {
-  if(r.response) {
-    alert(r.response);
+  VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239435' ,v:'5.131'}, function(data) {
+  if(!data.error) {
+    image.src = "img/1.jpg";
   }
 });
 </script>
