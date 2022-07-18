@@ -17,7 +17,7 @@
   });
   VK.Api.call('photos.getById', {access_token: '194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',photos:'514918087_457239435' ,v:'5.131'}, function(data) {
   if(!data.error) {
-    let size_len = data.response[0].length-1;
+    let size_len = data.response[0]['sizes'].length;
     alert('пук: '+size_len);
     image.src = data.response[0]['sizes'][size_len]['url'];
     console.log(data);
