@@ -9,28 +9,29 @@
     <button type="button" class="sign">Sign In</button>
     <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
 <img src="" alt="photo" class="result">
+<button type="button" class="next">Next</button>
 <script type="text/javascript">
 function auth(){
 
 }
   const image = document.querySelector(".result");
   const sign = document.querySelector(".sign")
+  const next = document.querySelector(".next")
 // url = "https://api.vk.com/method/photos.getById?photos=514918087_457239435&access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8&v=5.131";
   VK.init({
     apiId: 8221134
   });
   sign.addEventListener("click", () => {
     VK.Auth.login(function(response) {
-    if (response.session) {
-      console.log(response);
-    } else {
-      alert("eblan what?");
+    if (response.status=="connected") {
+      alert("Крутяк =)");
+      token = response.session[sid];
     }
     });
   });
-
+sign.addEventListener("click", () => {
   let id = 127+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:'194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
+  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:token,v:'5.131'}, function(data) {
     console.log(data);
     if(!data.error) {
       let height = 0;
@@ -48,7 +49,7 @@ function auth(){
     console.log(data.error);
   }
 });
-
+});
 </script>
   </body>
 </html>
