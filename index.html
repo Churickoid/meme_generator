@@ -11,7 +11,7 @@
   <img src="" alt="photo" class="result">
   <div class="panel_page">
     <button type="button" id="next">Next</button>
-    <input type="text" id="numOfImage" value="0" min="0">
+    <input type="number" id="numOfImage" value="0" min="0">
     <button type="button" id="previous">Previous</button>
     <button type="button" class="save">Save</button>
   </div>
@@ -30,7 +30,7 @@
 
   const save = document.querySelector(".save")
 
-  const rand = document.querySelector(".save")
+  const rand = document.querySelector(".rand")
   randValue = false;
 
   const owner = 514918087;
@@ -46,7 +46,7 @@
       }
     });
   }
-  function imageTake(id){
+  async function imageTake(id){
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
       if(!data.error) {
@@ -70,7 +70,7 @@
   VK.init({
     apiId: 8221134
   });
-  VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,v:'5.131'}, function(data) {
+  VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
     max_num = data.response['items'][0]['id']-first_id;
     numOfImage.max = max_num;
     console.log(data);
