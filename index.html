@@ -50,7 +50,6 @@
     });
   }
   async function imageTake(num){
-    try {
     url = '';
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
@@ -68,11 +67,8 @@
         }
       }
     });
+    console.log(url);
     return url;
-  }
-  catch(error){
-    console.log(error);
-  }
 }
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
@@ -86,7 +82,7 @@
   next.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
-    }else{
+    }else if(num<=max_num){
       num = num+1;
     }
     image.src = imageTake(num);
@@ -95,7 +91,7 @@
   previous.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
-    }else{
+    }else if(num>=0){
       num = num-1;
     }
     image.src = imageTake(num);
