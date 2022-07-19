@@ -53,6 +53,7 @@
     try {
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
+      console.log(data);
       if(!data.error) {
         let height = 0;
         let n = 0;
@@ -63,9 +64,9 @@
             n = i;
           }
         }
-        return size[n]['url'];
       }
     });
+    return size[n]['url'];
   }
   catch(error){
     console.log(error);
