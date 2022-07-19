@@ -58,16 +58,16 @@
       if(!data.error) {
         let height = 0;
         let n = 0;
+        let size = data.response[0]['sizes'];
         for (let i = 0; i < size.length; i++) {
           if(size[i]['height']>height){
-            height= data.response[0]['sizes'][i]['height'];
+            height= size[i]['height'];
             n = i;
-            url = data.response[0]['sizes'][n]['url'];
+            url = size[n]['url'];
           }
         }
       }
     });
-    console.log(url);
     return url;
   }
   catch(error){
