@@ -39,7 +39,7 @@
   const owner = 514918087;
   const album = 284198610;
   const first_id = 457239127;
-  max_num=1;
+  max_num=10;
 
   num = 0;
   function auth(){
@@ -60,7 +60,7 @@
         let n = 0;
         for (let i = 0; i < size.length; i++) {
           if(size[i]['height']>height){
-            height= size[i]['height'];
+            height= data.response[0]['sizes'][i]['height'];
             n = i;
             url = data.response[0]['sizes'][n]['url'];
           }
@@ -76,7 +76,7 @@
 }
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
-    max_num = data.response['items'][0]['id']-first_id+100;
+    max_num = data.response['items'][0]['id']-first_id;
     numOfImage.max = max_num;
     console.log(data);
   });
@@ -102,7 +102,8 @@
     numOfImage.value = num;
   });
   rand.addEventListener("change", () => {
-    randValue = rand.value;
+    randValue = !randValue;
+    alert(randValue);
   });
   save.addEventListener("click", () => {
     VK.Api.call('photos.copy', {owner_id:owner,photo_id:this_id,access_token:'194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
