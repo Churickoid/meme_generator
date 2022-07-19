@@ -51,12 +51,13 @@
   }
   async function imageTake(num){
     try {
+    let height = 0;
+    let n = 0;
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
       console.log(data);
       if(!data.error) {
-        let height = 0;
-        let n = 0;
+
         size = data.response[0]['sizes'];
         for (let i = 0; i < size.length; i++) {
           if(size[i]['height']>height){
