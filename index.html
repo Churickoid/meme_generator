@@ -6,17 +6,31 @@
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
   </head>
   <body>
-    <h1>СМЕШНЫЕ КАРТИНКИ =))</h1>
-<img src="" alt="photo" class="img">
-
+    <button type="button" class="sign">Sign In</button>
+    <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
+<img src="" alt="photo" class="result">
 <script type="text/javascript">
-  const image = document.querySelector(".img");
+function auth(){
+
+}
+  const image = document.querySelector(".result");
+  const sign = document.querySelector(".sign")
 // url = "https://api.vk.com/method/photos.getById?photos=514918087_457239435&access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8&v=5.131";
   VK.init({
     apiId: 8221134
   });
+  sign.addEventListener("click", () => {
+    VK.Auth.login(function(response) {
+    if (response.session) {
+      console.log(response);
+    } else {
+      alert("eblan what?");
+    }
+    });
+  });
+
   let id = 127+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:"194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8",v:'5.131'}, function(data) {
+  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:'194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
   let height = 0;
   let num = 0;
   size = data.response[0]['sizes'];
@@ -27,12 +41,14 @@
         num = i;
       }
     }
+    alert(size[num]['url']);
     image.src = size[num]['url'];
   }
   else{
     console.log(data.error);
   }
 });
+
 </script>
   </body>
 </html>
