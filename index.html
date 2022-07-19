@@ -20,6 +20,9 @@
   </div>
 
   <script type="text/javascript">
+  VK.init({
+    apiId: 8221134
+  });
   const sign = document.querySelector(".sign")
 
   const image = document.querySelector(".result");
@@ -47,6 +50,7 @@
     });
   }
   async function imageTake(id){
+    try {
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
       if(!data.error) {
@@ -61,15 +65,13 @@
         }
         return size[num]['url'];
       }
-      else{
-        console.log(data.error);
-      }
     });
   }
+  catch(error){
+    console.log(error);
+  }
+}
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
-  VK.init({
-    apiId: 8221134
-  });
   VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
     max_num = data.response['items'][0]['id']-first_id;
     numOfImage.max = max_num;
