@@ -1,62 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>VK API</title>
-    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
-  </head>
-  <body>
-    <button type="button" class="sign">Sign In</button>
-    <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
-<img src="" alt="photo" class="result">
-<button type="button" class="next">Next</button>
-<button type="button" class="save">Save</button>
-<script type="text/javascript">
-function auth(){
+<head>
+  <meta charset="utf-8">
+  <title>VK API</title>
+  <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+</head>
+<body>
+  <button type="button" class="sign">Sign In</button>
+  <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
+  <img src="" alt="photo" class="result">
+  <div class="panel_page">
+    <button type="button" id="next">Next</button>
+    <input type="text" id="numOfImage" value="0" min="0">
+    <button type="button" id="previous">Previous</button>
+    <button type="button" class="save">Save</button>
+  </div>
+  <div class="panel_rand">
+    <p>random?<input type="checkbox" id="rand"></p>
+  </div>
 
-}
-  const image = document.querySelector(".result");
+  <script type="text/javascript">
   const sign = document.querySelector(".sign")
-  const next = document.querySelector(".next")
+
+  const image = document.querySelector(".result");
+
+  const next = document.getElementById("next")
+  const previous = document.getElementById("previous")
+  const numOfImage = document.getElementById("numOfImage")
+
   const save = document.querySelector(".save")
+
+  const rand = document.querySelector(".save")
+  randValue = false;
+
   const owner = 514918087;
-  first_id = 457239127;
-//access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
+  const album = 284198610;
+  const first_id = 457239127;
+  max_num=1;
+
+  num = 0;
+  function auth(){
+    VK.Auth.login(function(response){
+      if (response.status=="connected") {
+        alert("Крутяк =)");
+      }
+    });
+  }
+  function imageTake(id){
+    this_id = first_id + num;
+    VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
+      if(!data.error) {
+        let height = 0;
+        let num = 0;
+        size = data.response[0]['sizes'];
+        for (let i = 0; i < size.length; i++) {
+          if(size[i]['height']>height){
+            height= size[i]['height'];
+            num = i;
+          }
+        }
+        return size[num]['url'];
+      }
+      else{
+        console.log(data.error);
+      }
+    });
+  }
+  //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   VK.init({
     apiId: 8221134
   });
-  sign.addEventListener("click", () => {
-    VK.Auth.login(function(response){
-    if (response.status=="connected") {
-      alert("Крутяк =)");
-    }
-  },4);
-  });
-next.addEventListener("click", () => {
-  id = first_id+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:owner+'_'+id,v:'5.131'}, function(data) {
-    if(!data.error) {
-      let height = 0;
-      let num = 0;
-      size = data.response[0]['sizes'];
-    for (let i = 0; i < size.length; i++) {
-      if(size[i]['height']>height){
-        height= size[i]['height'];
-        num = i;
-      }
-    }
-    image.src = size[num]['url'];
-  }
-  else{
-    console.log(data.error);
-  }
-});
-});
-save.addEventListener("click", () => {
-  VK.Api.call('photos.copy', {owner_id:owner,photo_id:id,v:'5.131'}, function(data) {
+  VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,v:'5.131'}, function(data) {
+    max_num = data.response['items'][0]['id']-first_id;
+    numOfImage.max = max_num;
     console.log(data);
-});
-});
+  });
+  sign.addEventListener("click", () => {
+    auth();
+  });
+  next.addEventListener("click", () => {
+    if (randValue) {
+      num = Math.floor(Math.random() * max_num);
+    }else{
+      num = num+1;
+    }
+    image.src = imageTake(num);
+    numOfImage.value = num;
+  });
+  previous.addEventListener("click", () => {
+    if (randValue) {
+      num = Math.floor(Math.random() * max_num);
+    }else{
+      num = num-1;
+    }
+    image.src = imageTake(num);
+    numOfImage.value = num;
+  });
+  rand.addEventListener("change", () => {
+    randValue = rand.value;
+  });
+  save.addEventListener("click", () => {
+    VK.Api.call('photos.copy', {owner_id:owner,photo_id:this_id,access_token:'194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
+      console.log(data);
+    });
+  });
+
 </script>
-  </body>
+</body>
 </html>
