@@ -26,11 +26,11 @@ function auth(){
     apiId: 8221134
   });
   sign.addEventListener("click", () => {
-    VK.Auth.login(function(response,4) {
+    VK.Auth.login(function(response){
     if (response.status=="connected") {
       alert("Крутяк =)");
     }
-    });
+  },4);
   });
 next.addEventListener("click", () => {
   id = first_id+Math.floor(Math.random() * 300);
