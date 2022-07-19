@@ -62,9 +62,10 @@
           if(size[i]['height']>height){
             height= size[i]['height'];
             n = i;
-            url = size[n]['url'];
           }
         }
+        console.log(n);
+        url = size[n]['url'];
       }
     });
     console.log(url);
