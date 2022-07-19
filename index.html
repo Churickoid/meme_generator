@@ -51,23 +51,24 @@
   }
   async function imageTake(num){
     try {
-    let height = 0;
-    let n = 0;
-    let size = data.response[0]['sizes'];
+    url = '';
     this_id = first_id + num;
     VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
       console.log(data);
       if(!data.error) {
-
+        let height = 0;
+        let n = 0;
         for (let i = 0; i < size.length; i++) {
           if(size[i]['height']>height){
             height= size[i]['height'];
             n = i;
+            url = data.response[0]['sizes'][n]['url'];
           }
         }
       }
     });
-    return size[n]['url'];
+    console.log(url);
+    return url;
   }
   catch(error){
     console.log(error);
