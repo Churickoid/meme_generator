@@ -34,7 +34,7 @@ function auth(){
   });
 next.addEventListener("click", () => {
   id = first_id+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:owner+'_'+first_id,v:'5.131'}, function(data) {
+  VK.Api.call('photos.getById', {photos:owner+'_'+id,v:'5.131'}, function(data) {
     if(!data.error) {
       let height = 0;
       let num = 0;
