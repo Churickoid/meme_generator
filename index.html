@@ -22,7 +22,7 @@ function auth(){
     apiId: 8221134
   });
   sign.addEventListener("click", () => {
-    VK.Auth.login(function(response) {
+    VK.Auth.login({scope:"photos"},function(response) {
     if (response.status=="connected") {
       alert("Крутяк =)");
       token = response.session['sid'];
@@ -31,7 +31,7 @@ function auth(){
   });
 next.addEventListener("click", () => {
   let id = 127+Math.floor(Math.random() * 300);
-  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, v:'5.131'}, function(data) {
+  VK.Api.call('photos.getById', {photos:'514918087_457239'+id, access_token:token,v:'5.131'}, function(data) {
     console.log(data);
     if(!data.error) {
       let height = 0;
