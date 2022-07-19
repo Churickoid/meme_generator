@@ -13,7 +13,6 @@
     <button type="button" id="next">Next</button>
     <input type="number" id="numOfImage" value="0" min="0">
     <button type="button" id="previous">Previous</button>
-    <button type="button" class="save">Save</button>
   </div>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
@@ -30,8 +29,6 @@
   const next = document.getElementById("next")
   const previous = document.getElementById("previous")
   const numOfImage = document.getElementById("numOfImage")
-
-  const save = document.querySelector(".save")
 
   const rand = document.getElementById("rand")
   randValue = false;
@@ -77,9 +74,9 @@
   next.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
-    }else if(num<=max_num){
+    }else if(num<max_num){
       num = num+1;
-    }else if(num>max_num){
+    }else if(num==max_num){
       num = 0;
     }
     imageTake(num);
@@ -88,10 +85,10 @@
   previous.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
-    }else if(num>=0){
+    }else if(num>0){
       num = num-1;
     }
-    else if(num<0){
+    else if(num==0){
       num= max_num;
     }
     imageTake(num);
@@ -100,11 +97,7 @@
   rand.addEventListener("change", () => {
     randValue = !randValue;
   });
-  save.addEventListener("click", () => {
-    VK.Api.call('photos.copy', {owner_id:owner,photo_id:this_id,access_token:'194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
-      console.log(data);
-    });
-  });
+
 
 </script>
 </body>
