@@ -39,17 +39,27 @@
   max_num=10;
 
   num = 0;
+  function numTake(){
+    VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
+      max_num = data.response['items'][0]['id']-first_id;
+      numOfImage.max = max_num;
+      console.log(data);
+    });
+  }
   function auth(){
     VK.Auth.login(function(response){
       if (response.status=="connected") {
-        alert("Крутяк =)");
+        alert("ВАШИ ДАННЫЕ УТЕКЛИ В ДАРК НЕТ! БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ ");
       }
     });
+  numTake();
   }
+
    function imageTake(num){
     this_id = first_id + num;
-    VK.Api.call('photos.getById', {photos:owner+'_'+this_id,v:'5.131'}, function(data) {
-      if(!data.error) {
+    VK.Api.call('photos.getById', {photos:owner+'_'+this_id,access_token:'access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
+  console.log(data);
+    if(!data.error) {
         let height = 0;
         let n = 0;
         let size = data.response[0]['sizes'];
@@ -64,10 +74,7 @@
     });
 }
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
-  VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
-    max_num = data.response['items'][0]['id']-first_id;
-    numOfImage.max = max_num;
-  });
+  numTake();
   imageTake(0);
   sign.addEventListener("click", () => {
     auth();
