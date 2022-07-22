@@ -1,0 +1,25 @@
+
+.center{
+  position: relative;
+  text-align: center;
+}
+.content{
+  margin: 0 auto;
+  display: inline-block;
+  padding:20px;
+  background: black;
+  overflow: hidden;
+
+}
+
+.image{
+  max-width: 600px;
+  max-height: 600px;
+  border: 4px solid white;
+}
+.phrase{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 42px;
+  text-align: center;
+  color:white;
+}

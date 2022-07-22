@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <title>VK API</title>
   <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <button type="button" class="sign">Sign In</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
+  <div class="center">
   <div class="content">
     <img src="" alt="photo" class="image">
     <p class="phrase">четыре слова...</p>
@@ -16,6 +18,7 @@
     <button type="button" id="next">Next</button>
     <input type="number" id="numOfImage" value="0" min="0">
     <button type="button" id="previous">Previous</button>
+  </div>
   </div>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
@@ -51,7 +54,6 @@
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
       numOfImage.max = max_num;
-      console.log(data.response['items'][0]['id']-first_idImage);
     });
   }
   function auth(){
@@ -115,6 +117,11 @@ numTake();
     imageTake(num);
     phraseTake(num);
     numOfImage.value = num;
+  });
+  numOfImage.addEventListener("change", () => {
+    num  = numOfImage.value = num;
+    imageTake(num);
+    phraseTake(num);
   });
   previous.addEventListener("click", () => {
     if (randValue) {
