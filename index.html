@@ -63,7 +63,7 @@
 
    function imageTake(num){
     this_idImage = first_idImage + num;
-    VK.Api.call('photos.getById', {posts:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
+    VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
     console.log(data);
     if(!data.error) {
         let height = 0;
