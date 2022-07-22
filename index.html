@@ -86,15 +86,15 @@ function phraseTake(num){
 
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
 try {
-      if(data.response[0]['text']!='') {
+      if(data.response[0]['text']!="") {
         phrase.textContent = data.response[0]['text'];
         }
         else {
-          phraseTake(num+100);
+          phraseTake(num+300);
         }
       }
       catch (e) {
-      phraseTake(num+100);
+      phraseTake(num+300);
       }
   });
 }
