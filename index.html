@@ -83,20 +83,22 @@
 }
 function phraseTake(num){
   this_idPhrase = first_idPhrase + num;
-  try {
+
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
-      if(data.response[0]['text']!='Запись удалена') {
+try {
+      if(data.response[0]['text']!='') {
         phrase.textContent = data.response[0]['text'];
         }
         else {
           phraseTake(num+100);
         }
+      }
+      catch (e) {
+      phraseTake(num+100);
+      }
   });
 }
-catch (e) {
-phraseTake(num+100);
-}
-}
+
 numTake();
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   sign.addEventListener("click", () => {
