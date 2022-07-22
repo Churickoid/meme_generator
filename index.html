@@ -66,7 +66,6 @@
    function imageTake(num){
     this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
-    console.log(data);
     if(!data.error) {
         let height = 0;
         let n = 0;
@@ -87,7 +86,7 @@ function phraseTake(num){
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
 try {
   console.log(data);
-      if(data.response[0]['text']!='Запись удалена') {
+      if(!data.response[0]['is_deleted']) {
         phrase.textContent = data.response[0]['text'];
         }
         else {
