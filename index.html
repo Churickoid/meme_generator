@@ -86,6 +86,7 @@ function phraseTake(num){
 
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
 try {
+  console.log(data);
       if(data.response[0]['text']!='Запись удалена') {
         phrase.textContent = data.response[0]['text'];
         }
