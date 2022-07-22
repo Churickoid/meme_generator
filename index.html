@@ -8,7 +8,10 @@
 <body>
   <button type="button" class="sign">Sign In</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
-  <img src="" alt="photo" class="result">
+  <div class="content">
+    <img src="" alt="photo" class="result">
+    <p class="phrase">четыре слова...</p>
+  </div>
   <div class="panel_page">
     <button type="button" id="next">Next</button>
     <input type="number" id="numOfImage" value="0" min="0">
@@ -33,15 +36,17 @@
   const rand = document.getElementById("rand")
   randValue = false;
 
-  const owner = 514918087;
+  const ownerImage = 514918087;
+  const ownerPhrase= -37245324;
   const album = 284198610;
-  const first_id = 457239127;
+  const first_idImage = 457239127;
+  const first_idPhrase= 124;
   max_num=10;
 
   num = 0;
   function numTake(){
-    VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
-      max_num = data.response['items'][0]['id']-first_id;
+    VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
+      max_num = data.response['items'][0]['id']-first_idImage;
       numOfImage.max = max_num;
       console.log(data);
     });
@@ -56,9 +61,8 @@
   }
 
    function imageTake(num){
-    this_id = first_id + num;
-    VK.Api.call('photos.getById', {photos:owner+'_'+this_id,access_token:'access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8',v:'5.131'}, function(data) {
-  console.log(data);
+    this_idImage = first_idImage + num;
+    VK.Api.call('wall.getById', {posts:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
     if(!data.error) {
         let height = 0;
         let n = 0;
@@ -73,9 +77,19 @@
       }
     });
 }
+function phraseTake(num){
+VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_id,v:'5.131'}, function(data) {
+  this_idImage = first_idImage + num;
+  if(!data.error) {
+    phrase.html = data.response[0]['text'];
+    }
+  });
+  }
+
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   numTake();
-  imageTake(0);
+  imageTake(num);
+  phraseTake(num);
   sign.addEventListener("click", () => {
     auth();
   });
