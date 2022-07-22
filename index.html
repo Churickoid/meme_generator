@@ -27,7 +27,8 @@
   });
   const sign = document.querySelector(".sign")
 
-  const image = document.querySelector(".result");
+  const image = document.querySelector(".image");
+  const phrase = document.querySelector(".phrase");
 
   const next = document.getElementById("next")
   const previous = document.getElementById("previous")
@@ -63,6 +64,7 @@
    function imageTake(num){
     this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {posts:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
+    console.log(data);
     if(!data.error) {
         let height = 0;
         let n = 0;
@@ -80,6 +82,7 @@
 function phraseTake(num){
   this_idPhrase = first_idPhrase + num;
 VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
+  console.log(data);
   if(!data.error) {
     phrase.html = data.response[0]['text'];
     }
