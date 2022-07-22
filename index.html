@@ -48,6 +48,7 @@
     VK.Api.call('photos.get', {owner_id:owner,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_id;
       numOfImage.max = max_num;
+      console.log(data);
     });
   }
    function imageTake(num){
