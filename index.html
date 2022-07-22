@@ -43,7 +43,7 @@
 
   const ownerPhrase= -37245324;
   const first_idPhrase= 124;
-  
+
   max_num=10;
 
   num = 0;
@@ -86,7 +86,7 @@ function phraseTake(num){
 VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
   console.log(data);
   if(!data.error) {
-    phrase.html = data.response[0]['text'];
+    phrase.textContent = data.response[0]['text'];
     }
   });
   }
