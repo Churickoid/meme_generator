@@ -88,7 +88,7 @@
           }
         }
         catch (e) {
-          if(!data.error){
+          if(e instanceof TypeError && !data.error){
             phraseTake(num+300+z);
             z++;
           }
