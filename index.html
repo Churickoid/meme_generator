@@ -83,6 +83,7 @@
           }
         }
         image.src = size[n]['url'];
+        console.log(data);
       }
     });
 }
@@ -91,7 +92,6 @@ function phraseTake(num){
 
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
 try {
-    console.log(data);
       if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
         phrase.textContent = data.response[0]['text'];
         }
@@ -101,7 +101,7 @@ try {
       }
       catch (e) {
         console.log(data);
-        if(e instanceof TypeError){
+        if(e instanceof TypeError && !data.error){
           phraseTake(num+300);
         }
       }
