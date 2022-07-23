@@ -85,21 +85,21 @@
           }
         }
         image.src = size[n]['url'];
-        console.log(data);
       }
     else {
-      image.src = "img/error.jpg";
+      console.log(data);
+      image.src = "/img/error.jpg";
       error_p = true;
     }
     });
 }
 function phraseTake(num){
-  this_idPhrase = first_idPhrase + num;
 if (error_p) {
 phrase.textContent = "No ID? ;-;"
 error_p = false;
 }
 else {
+    this_idPhrase = first_idPhrase + num;
     VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
 try {
       if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
@@ -164,6 +164,7 @@ loginStatus();
     }
     imageTake(num);
     phraseTake(num);
+    numOfImage.value = num;
   });
   rand.addEventListener("change", () => {
     randValue = !randValue;
