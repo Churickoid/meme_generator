@@ -70,10 +70,9 @@
       console.log(data);
     });
   }
-  function phraseTake(num){
-  if (error_p) {
+  function phraseTake(num,error = false){
+  if (error) {
   phrase.textContent = "No ID? ;-;"
-  error_p = false;
   }
   else {
       this_idPhrase = first_idPhrase + num;
@@ -111,14 +110,14 @@
           }
         }
         image.src = size[n]['url'];
+        phraseTake(num);
       }
     else if(data.error['error_code']==200) {
       console.log(data);
       image.src = "/img/error.jpg";
-      error_p = true;
+      phraseTake(num,true);
     }
     });
-    phraseTake(num);
 }
 
 numTake();
