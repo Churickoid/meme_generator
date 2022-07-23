@@ -130,7 +130,7 @@ loginStatus()
     numOfImage.value = num;
   });
   numOfImage.addEventListener("change", () => {
-    num  = numOfImage.value;
+    num  = parseInt(numOfImage.value)
     imageTake(num);
     phraseTake(num);
   });
