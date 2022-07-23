@@ -100,7 +100,7 @@
    function imageTake(num){
     this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
-    if(data.error['error_code']!=200) {
+    if(!data.error) {
         let height = 0;
         let n = 0;
         let size = data.response[0]['sizes'];
@@ -112,7 +112,7 @@
         }
         image.src = size[n]['url'];
       }
-    else {
+    else if(data.error['error_code']==200) {
       console.log(data);
       image.src = "/img/error.jpg";
       error_p = true;
