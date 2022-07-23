@@ -96,16 +96,19 @@ try {
         phrase.textContent = data.response[0]['text'];
         }
         else {
-          phraseTake(num+300);
+          phraseTake(num+300+z);
+          z++;
         }
       }
       catch (e) {
         console.log(data);
         if(e instanceof TypeError && !data.error){
-          phraseTake(num+300);
+          phraseTake(num+300+z);
+          z++;
         }
       }
   });
+  z=0
 }
 numTake();
 loginStatus()
@@ -127,7 +130,7 @@ loginStatus()
     numOfImage.value = num;
   });
   numOfImage.addEventListener("change", () => {
-    num  = numOfImage.value = num;
+    num  = numOfImage.value;
     imageTake(num);
     phraseTake(num);
   });
