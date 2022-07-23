@@ -50,6 +50,7 @@
   max_num=10;
 
   num = 0;
+  z=0;
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
@@ -101,14 +102,13 @@ try {
         }
       }
       catch (e) {
-        console.log(data);
         if(e instanceof TypeError && !data.error){
           phraseTake(num+300+z);
           z++;
         }
       }
+      z=0;
   });
-  z=0
 }
 numTake();
 loginStatus()
