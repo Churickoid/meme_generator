@@ -51,7 +51,7 @@
 
   error_p= false;
   num = 0;
-  z=0;
+  z=-1;
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
@@ -83,17 +83,18 @@
           phrase.textContent = data.response[0]['text'];
           }
           else {
-            phraseTake(num+300+z);
             z++;
+            phraseTake(num+300+z);
           }
         }
         catch (e) {
           if(e instanceof TypeError && !data.error){
-            phraseTake(num+300+z);
             z++;
+            phraseTake(num+300+z);
+
           }
         }
-        z=0;
+        z=-1;
     });
   }
   }
