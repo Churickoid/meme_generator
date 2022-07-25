@@ -91,8 +91,15 @@
           }
         }
         catch (e) {
-          alert("ОШИБКА =)");
-          console.log(e);
+          if(e instanceof TypeError && !data.error){
+            if(z==0){
+              phraseTake(num+300+z);
+              z=1;
+            }
+            else {
+              phraseTake(num+z);
+            }
+         }
           }
     });
   }
