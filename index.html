@@ -78,7 +78,7 @@
       this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
   try {
-        console.log(data);
+        console.log(num);
         if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
           phrase.textContent = data.response[0]['text'];
           }
@@ -91,6 +91,7 @@
           }
         }
         catch (e) {
+          console.log(e);
           if(e instanceof TypeError && !data.error){
             if(z==0){
               phraseTake(num+300+z);
