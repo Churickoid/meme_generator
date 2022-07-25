@@ -61,7 +61,7 @@
   function auth(){
     VK.Auth.login(function(response){
       if (response.status=="connected") {
-        alert("ВАШИ ДАННЫЕ УТЕКЛИ В ДАРК НЕТ! БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ БЕЗНОГNМ ");
+        console.log("=)");
       }
     });
   }
@@ -70,7 +70,7 @@
       console.log(data);
     });
   }
-  function phraseTake(num,error = false){
+  function phraseTake(error = false){
   if (error) {
   phrase.textContent = "No ID? ;-;"
   }
@@ -83,7 +83,7 @@
           phrase.textContent = data.response[0]['text'];
           }
           else {
-            phraseTake(num+300+z);
+            phraseTake();
             z++;
           }
         }
@@ -97,7 +97,7 @@
     });
   }
   }
-   function imageTake(num){
+   function imageTake(){
     this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
     if(!data.error) {
@@ -111,12 +111,11 @@
           }
         }
         image.src = size[n]['url'];
-        phraseTake(num);
+        phraseTake();
       }
     else if(data.error['error_code']==200) {
-      console.log(data);
       image.src = "/img/error.jpg";
-      phraseTake(num,true);
+      phraseTake(true);
     }
     });
 }
@@ -136,7 +135,7 @@ loginStatus();
     }else if(num==max_num){
       num = 0;
     }
-    imageTake(num);
+    imageTake();
     numOfImage.value = num;
   });
   numOfImage.addEventListener("change", () => {
@@ -149,7 +148,7 @@ loginStatus();
     else {
       num  = parseInt(numOfImage.value);
     }
-    imageTake(num);
+    imageTake();
     numOfImage.value = num;
   });
   previous.addEventListener("click", () => {
@@ -161,7 +160,7 @@ loginStatus();
     else if(num==0){
       num= max_num;
     }
-    imageTake(num);
+    imageTake();
     numOfImage.value = num;
   });
   rand.addEventListener("change", () => {
