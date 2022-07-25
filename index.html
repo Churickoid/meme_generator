@@ -75,7 +75,7 @@
   phrase.textContent = "No ID? ;-;"
   }
   else {
-      this_idPhrase = first_idPhrase + z;
+      this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
   try {
         console.log(data);
