@@ -77,23 +77,27 @@
   else {
       this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
-        console.log(data);
   try {
         if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
           phrase.textContent = data.response[0]['text'];
           }
           else if(z==0){
+            console.log(data);
             phraseTake(num+300+z);
           }
           else {
             z=1;
+            console.log(data);
             phraseTake(num+z);
           }
         }
         catch (e) {
-          
+          if(e instanceof TypeError && !data.error){
+            z++;
+            phraseTake(num+300+z);
+
+          }
         }
-        z=0;
     });
   }
   }
@@ -115,7 +119,7 @@
       }
     else if(data.error['error_code']==200) {
       image.src = "/img/error.jpg";
-      phraseTake(true);
+      phraseTake(num,true);
     }
     });
 }
