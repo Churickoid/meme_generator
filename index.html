@@ -70,7 +70,7 @@
       console.log(data);
     });
   }
-  function phraseTake(z,error = false){
+  function phraseTake(num,error = false){
   if (error) {
   phrase.textContent = "No ID? ;-;"
   }
@@ -91,7 +91,8 @@
           }
         }
         catch (e) {
-
+          alert("ОШИБКА =)");
+          console.log(e);
           }
     });
   }
