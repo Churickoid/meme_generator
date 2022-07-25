@@ -51,7 +51,7 @@
 
   error_p= false;
   num = 0;
-  z=300;
+  z=0;
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
@@ -70,7 +70,7 @@
       console.log(data);
     });
   }
-  function phraseTake(num,error = false){
+  function phraseTake(z,error = false){
   if (error) {
   phrase.textContent = "No ID? ;-;"
   }
@@ -82,18 +82,18 @@
         if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
           phrase.textContent = data.response[0]['text'];
           }
+          else if(z==0){
+            phraseTake(num+300+z);
+          }
           else {
-            phraseTake(z);
+            z=1;
+            phraseTake(num+z);
           }
         }
         catch (e) {
-          if(e instanceof TypeError && !data.error){
-            z++;
-            phraseTake(num+300+z);
-
-          }
+          
         }
-        z=300;
+        z=0;
     });
   }
   }
@@ -111,7 +111,7 @@
           }
         }
         image.src = size[n]['url'];
-        phraseTake();
+        phraseTake(num);
       }
     else if(data.error['error_code']==200) {
       image.src = "/img/error.jpg";
