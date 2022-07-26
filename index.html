@@ -170,7 +170,7 @@
     }
     if (num>your_num){
       your_num=num;
-      db.mycollection.getById(_id, function(err, res){
+      db.account.getById(_id, function(err, res){
       if (!err){
           your_acc = res;
           console.log(your_acc);
