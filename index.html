@@ -152,15 +152,17 @@ loginStatus();
       if (!err){
         your_num = res[0]["photo_count"];
         console.log(your_num);
-        res['photo_count']++;
-        res.save(function(err, res){});
-
     }
     else {
       console.log("=)");
     }
   });
-
+  x['photo_count']++;
+  x.save(function(err, res){
+    if (!err){
+      console.log("=)");
+  }
+  });
   });
 
   next.addEventListener("click", () => {
