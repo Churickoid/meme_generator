@@ -85,7 +85,7 @@
       //подгружать номер там
     }
     else {
-      var instance = new db.account({"vk_id":'"'+your_id+'"', "photo_count":"0"});
+      var instance = new db.account({"vk_id":your_id, "photo_count":"0"});
       instance.save(function(err, res){
         console.log(res);
         console.log(err);
