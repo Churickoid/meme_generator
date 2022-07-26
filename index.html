@@ -169,18 +169,17 @@
       num = 0;
     }
     if (num>your_num){
-      your_num=num;
+      your_num;
       db.account.getById(_id, function(err, res){
       if (!err){
-          your_acc = res;
+          res["photo_count"]=num;
+          res.save(function(err, res){
+            if (!err){
+        console.log(res);
+        }
+    });
     }
   });
-      your_acc["photo_count"]++;
-      your_acc.save(function(err, res){
-        if (!err){
-    console.log(res);
-    }
-});
 }
     imageTake();
     numOfImage.value = num;
