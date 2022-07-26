@@ -173,11 +173,13 @@
       db.account.getById(_id, function(err, res){
       if (!err){
           your_acc = res;
-          console.log(your_acc);
     }
   });
       your_acc["photo_count"]++;
-      your_acc.on("PUT", function(err, evt){});
+      console.log(your_acc);
+      your_acc.on("PUT", function(err, evt){
+console.log(evt);
+      });
     }
     imageTake();
     numOfImage.value = num;
