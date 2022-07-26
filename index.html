@@ -72,14 +72,15 @@
   function auth(){
     VK.Auth.login(function(data){
           if (data.status=="connected") {
-            console.log(data);
+            your_id= data.session["user"]["id"];
+            console.log(your_id);
           }
         });
 
   }
   function checkAccount(){
     let x = false;
-    db.account.find({"vk_id":"1"},function(err, res){
+    db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
       if(!err) {
       your_num = res[0]["photo_count"];
       //подгружать номер там
