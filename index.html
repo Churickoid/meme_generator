@@ -177,7 +177,7 @@
     }
   });
       your_acc["photo_count"]++;
-      your_acc.reload(function(error, res){});
+      your_acc.on("PUT", function(err, evt){});
     }
     imageTake();
     numOfImage.value = num;
