@@ -83,14 +83,12 @@
       if(res.length != 0) {
       your_num = res[0]["photo_count"];
       //подгружать номер там
+        console.log("ПУПС");
     }
     else {
-      var instance = new db.account({"vk_id":'"'+your_id+'"', "photo_count":"0"});
+      var instance = new db.account({"vk_id":your_id, "photo_count":"0"});
       instance.save(function(err, res){
-        console.log(res);
-        console.log(err);
         if (!err){
-      console.log("=)");
       }
     });
   }
