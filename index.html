@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>VK API</title>
   <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
-  <script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js"></script>
+  <script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js?plainjs=true"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,14 +53,8 @@
   error_p= false;
   num = 0;
   z=0;
-
+  x = true;
   var db = new restdb("b772790ecff43b080ad094d28fb3fff5ba091");
-  var instance = new db.account({"vk_id": "1", "vk_id": "0"});
-  instance.save(function(err, res){
-  if (!err){
-    console.log(res);
-  }
-  });
 
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
@@ -74,17 +68,20 @@
         console.log(response);
       }
     });
+    db.photos.find({"vk_id": 1}, function(err, res){
+      if (!err){
+        console.log(res);
+    }
+    else {
+      console.log(err);
+    }
+    });
 
   }
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
       console.log(data);
     });
-    instance.save(function(err, res){
-    if (!err){
-      console.log(res);
-    }
-  });
   }
   function phraseTake(num,error = false){
   if (error) {
