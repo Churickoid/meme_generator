@@ -81,8 +81,8 @@
     db.account.find({"vk_id":your_id},function(err, res){
 
       if(res.length != 0) {
-      your_acc = db.account.getById(res[0]["_id"], function(err, res){});
-      console.log(your_acc)
+      your_acc = new db.account.getById(res[0]["_id"], function(err, res){});
+      console.log(your_acc);
       // your_num = your_acc["photo_count"];
     }
     else {
@@ -94,7 +94,6 @@
     });
   }
 });
-console.log(your_acc);
   }
 
   function loginStatus(){
