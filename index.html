@@ -85,7 +85,7 @@
     }
     else {
       your_acc = new db.account({"vk_id":your_id, "photo_count":0});
-      instance.save(function(err, res){
+      your_acc.save(function(err, res){
         if (!err){
           console.log("=)")
       }
@@ -179,9 +179,10 @@ loginStatus();
       your_num++;
       your_acc[0]["photo_count"]++;
       your_acc.on("PUT", function(err, evt){});
+    }
     imageTake();
     numOfImage.value = num;
-  }
+
   });
   numOfImage.addEventListener("change", () => {
     if (parseInt(numOfImage.value)>max_num) {
