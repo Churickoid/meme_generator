@@ -15,15 +15,15 @@
   <button type="button" id="test">Next</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
-  <div class="content">
-    <img src="" alt="photo" class="image">
-    <p class="phrase">четыре слова...</p>
-  </div>
-  <div class="panel_page">
-    <button type="button" id="next">Next</button>
-    <input type="number" id="numOfImage" value="0" min="0">
-    <button type="button" id="previous">Previous</button>
-  </div>
+    <div class="content">
+      <img src="" alt="photo" class="image">
+      <p class="phrase">четыре слова...</p>
+    </div>
+    <div class="panel_page">
+      <button type="button" id="next">Next</button>
+      <input type="number" id="numOfImage" value="0" min="0">
+      <button type="button" id="previous">Previous</button>
+    </div>
   </div>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
@@ -70,46 +70,41 @@
   }
   function auth(){
     VK.Auth.login(function(data){
-          if (data.status=="connected") {
-            your_id= data.session["user"]["id"];
-            console.log(your_id);
-          }
-        });
-        checkAccount();
+      if (data.status=="connected") {
+        your_id= data.session["user"]["id"];
+        console.log(your_id);
+      }
+    });
+    checkAccount();
   }
   function checkAccount(){
-    db.account.find({"vk_id":your_id},function(err, res){
-
-      if(res.length != 0) {
-      console.log(res)
-      // your_num = your_acc["photo_count"];
-    }
-    else {
-      your_acc = new db.account({"vk_id":your_id, "photo_count":0});
-      your_acc.save(function(err, res){
-      console.log(your_acc);
-
+    your_acc = new db.account({"vk_id":your_id, "photo_count":0});
+    your_acc.save(function(err, res){
+      if (error) {
+        db.account.find({"vk_id":your_id},function(err, res){
+          _id = res[0]["_id"];
+          your_num = res[0]["photo_count"];
+          console.log(_id);
+        });
+      }
     });
   }
-});
-  }
-
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
       console.log(data);
     });
   }
   function phraseTake(num,error = false){
-  if (error) {
-  phrase.textContent = "No ID? ;-;"
-  }
-  else {
+    if (error) {
+      phrase.textContent = "No ID? ;-;"
+    }
+    else {
       this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
-  try {
-        console.log(data);
-        if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
-          phrase.textContent = data.response[0]['text'];
+        try {
+          console.log(data);
+          if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
+            phrase.textContent = data.response[0]['text'];
           }
           else if(z==0){
             phraseTake(num+300+z);
@@ -128,15 +123,15 @@
             else {
               phraseTake(num+z);
             }
-         }
           }
-    });
+        }
+      });
+    }
   }
-  }
-   function imageTake(){
+  function imageTake(){
     this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
-    if(!data.error) {
+      if(!data.error) {
         let height = 0;
         let n = 0;
         let size = data.response[0]['sizes'];
@@ -150,15 +145,15 @@
         z=0;
         phraseTake(num);
       }
-    else if(data.error['error_code']==200) {
-      image.src = "/img/error.jpg";
-      phraseTake(num,true);
-    }
+      else if(data.error['error_code']==200) {
+        image.src = "/img/error.jpg";
+        phraseTake(num,true);
+      }
     });
-}
+  }
 
-numTake();
-loginStatus();
+  numTake();
+  loginStatus();
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   sign.addEventListener("click", () => {
     auth();
