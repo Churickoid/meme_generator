@@ -81,16 +81,14 @@
     db.account.find({"vk_id":your_id},function(err, res){
 
       if(res.length != 0) {
-      your_acc = new db.account.getById(res[0]["_id"], function(err, res){});
-      console.log(your_acc);
+      console.log(res)
       // your_num = your_acc["photo_count"];
     }
     else {
       your_acc = new db.account({"vk_id":your_id, "photo_count":0});
       your_acc.save(function(err, res){
-        if (!err){
-          console.log("=)")
-      }
+      console.log(your_acc);
+
     });
   }
 });
