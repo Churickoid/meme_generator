@@ -81,7 +81,7 @@
   function checkAccount(){
     let x = false;
     db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
-      console.log(data);
+      console.log(res);
       if(!err) {
       your_num = 10;
       //подгружать номер там
