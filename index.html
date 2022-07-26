@@ -61,8 +61,8 @@
 
   db = new restdb("62e01cf31894fe7edea718a6");
   your_num = 0;
+  your_id = 0;
 
- x=[];
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
@@ -71,10 +71,31 @@
   }
   function auth(){
     VK.Auth.login(function(data){
-          if (response.status=="connected") {
+          if (data.status=="connected") {
             console.log(data);
           }
         });
+
+  }
+  function checkAccount(){
+    let x = false;
+    db.account.find({"vk_id":"1"},function(err, res){
+      if(!err) {
+      your_num = res[0]["photo_count"];
+      //подгружать номер там
+    }
+    else {
+      x = true;
+    }
+  });
+  if (x) {
+    var instance = new db.account({"vk_id":'"'+your_id+'"', "photo_count":"0"});
+    instance.save(function(err, res){
+      if (!err){
+    console.log("=)");
+    }
+});
+  }
   }
 
   function loginStatus(){
@@ -145,6 +166,7 @@ loginStatus();
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   sign.addEventListener("click", () => {
     auth();
+    checkAccount();
     numTake();
   });
 
@@ -153,18 +175,12 @@ loginStatus();
       if (!err){
         your_num = res[0]["photo_count"];
         console.log(your_num);
-        x=res;
     }
     else {
       console.log("=)");
     }
   });
-  x['photo_count']++;
-  x.save(function(err, res){
-    if (!err){
-      console.log("=)");
-  }
-  });
+
   });
 
   next.addEventListener("click", () => {
