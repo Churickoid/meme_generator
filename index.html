@@ -34,6 +34,7 @@
     apiId: 8221134
   });
   const sign = document.querySelector(".sign");
+  const test = document.getElementById("test");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
@@ -75,7 +76,6 @@
         console.log(your_id);
       }
     });
-    checkAccount();
   }
   function checkAccount(){
     your_acc = new db.account({"vk_id":your_id, "photo_count":0});
@@ -160,7 +160,9 @@
     numTake();
   });
 
-
+  test.addEventListener("click", () => {
+    checkAccount();
+  });
 
   next.addEventListener("click", () => {
     if (randValue) {
