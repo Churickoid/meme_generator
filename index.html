@@ -11,6 +11,7 @@
 </head>
 <body>
   <button type="button" class="sign">Sign In</button>
+  <button type="button" id="test">Next</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
   <div class="content">
@@ -31,16 +32,17 @@
   VK.init({
     apiId: 8221134
   });
-  const sign = document.querySelector(".sign")
+  const sign = document.querySelector(".sign");
+  const test = document.getElementById("test");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
 
-  const next = document.getElementById("next")
-  const previous = document.getElementById("previous")
-  const numOfImage = document.getElementById("numOfImage")
+  const next = document.getElementById("next");
+  const previous = document.getElementById("previous");
+  const numOfImage = document.getElementById("numOfImage");
 
-  const rand = document.getElementById("rand")
+  const rand = document.getElementById("rand");
   randValue = false;
 
   const ownerImage = 514918087;
@@ -65,17 +67,13 @@
     });
   }
   function auth(){
-
-    db.photos.find({"vk_id": 1}, function(err, res){
-      if (!err){
-        console.log(res);
-    }
-    else {
-      console.log("=)");
-    }
-    });
-
+    VK.Auth.login(function(response){
+          if (response.status=="connected") {
+            console.log("=)");
+          }
+        });
   }
+
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
       console.log(data);
@@ -146,6 +144,19 @@ loginStatus();
     auth();
     numTake();
   });
+
+  test.addEventListener("click", () => {
+    db.account.find({"vk_id":"1"},function(err, res){
+      if (!err){
+        console.log(res);
+    }
+    else {
+      console.log("=)");
+    }
+  });
+
+  });
+
   next.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
