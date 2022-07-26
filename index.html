@@ -79,15 +79,11 @@
   }
   function checkAccount(){
     your_acc = new db.account({"vk_id":your_id, "photo_count":0});
-    your_acc.save(function(error, res){
-      if (error) {
-        db.account.find({"vk_id":your_id},function(err, res){
+    your_acc.save(function(error, res){}});
+    db.account.find({"vk_id":your_id},function(err, res){
           _id = res[0]["_id"];
           your_num = res[0]["photo_count"];
-          console.log(_id);
         });
-      }
-    });
   }
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
@@ -174,8 +170,14 @@
     }
     if (num>your_num){
       your_num=num;
-      your_acc[0]["photo_count"]=num;
-      your_acc.on("PUT", function(err, evt){});
+      db.mycollection.getById(_id, function(err, res){
+      if (!err){
+          your_acc = res;
+          console.log(your_acc);
+    }
+  });
+    your_acc[0]["photo_count"]++;
+      your_acc.reload(function(error, res){}});
     }
     imageTake();
     numOfImage.value = num;
