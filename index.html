@@ -76,19 +76,18 @@
             console.log(your_id);
           }
         });
-
+        errorX = false;
+        db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
+          if(res.length != 0) {
+          your_num = res[0]["photo_count"];
+          //подгружать номер там
+        }
+        else {
+          errorX = true;
+        }
+      });
   }
   function checkAccount(){
-    errorX = false;
-    db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
-      if(res.length != 0) {
-      your_num = res[0]["photo_count"];
-      //подгружать номер там
-    }
-    else {
-      errorX = true;
-    }
-  });
   console.log("og");
   if (errorX) {
     console.log("давай");
