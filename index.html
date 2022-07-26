@@ -79,18 +79,19 @@
 
   }
   function checkAccount(){
-    x = false;
+    errorX = false;
     db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
       if(res.length != 0) {
       your_num = res[0]["photo_count"];
       //подгружать номер там
     }
     else {
-      console.log("0_o");
-      x = true;
+      errorX = true;
     }
   });
-  if (x) {
+  console.log("og");
+  if (errorX) {
+    console.log("давай");
     var instance = new db.account({"vk_id":'"'+your_id+'"', "photo_count":"0"});
     instance.save(function(err, res){
       console.log(res);
