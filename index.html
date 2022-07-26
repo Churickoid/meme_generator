@@ -34,7 +34,6 @@
     apiId: 8221134
   });
   const sign = document.querySelector(".sign");
-  const test = document.getElementById("test");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
@@ -62,7 +61,7 @@
   db = new restdb("62e01cf31894fe7edea718a6");
   your_num = 0;
   your_id = 0;
-
+  _id = "";
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
@@ -76,19 +75,19 @@
             console.log(your_id);
           }
         });
+        checkAccount();
   }
   function checkAccount(){
-    errorX = false;
     db.account.find({"vk_id":your_id},function(err, res){
       if(res.length != 0) {
-      your_num = res[0]["photo_count"];
-      //подгружать номер там
-        console.log("ПУПС");
+      your_acc = db.account.getById(res[0]["_id"], function(err, res){});
+      your_num = your_acc[0]["photo_count"];
     }
     else {
-      var instance = new db.account({"vk_id":your_id, "photo_count":"0"});
+      your_acc = new db.account({"vk_id":your_id, "photo_count":0});
       instance.save(function(err, res){
         if (!err){
+          console.log("=)")
       }
     });
   }
@@ -164,21 +163,9 @@ loginStatus();
   sign.addEventListener("click", () => {
     auth();
     numTake();
-    checkAccount();
   });
 
-  test.addEventListener("click", () => {
-    db.account.find({"vk_id":"1"},function(err, res){
-      if (!err){
-        your_num = res[0]["photo_count"];
-        console.log(your_num);
-    }
-    else {
-      console.log("=)");
-    }
-  });
 
-  });
 
   next.addEventListener("click", () => {
     if (randValue) {
@@ -188,6 +175,10 @@ loginStatus();
     }else if(num==max_num){
       num = 0;
     }
+    if (num>your_num){
+      your_num++;
+      your_acc[0]["photo_count"]++;
+        your_acc.on("PUT", function(err, data:){});
     imageTake();
     numOfImage.value = num;
   });
