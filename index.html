@@ -181,7 +181,8 @@ loginStatus();
       your_acc.on("PUT", function(err, evt){});
     imageTake();
     numOfImage.value = num;
-  });
+  }
+  
   numOfImage.addEventListener("change", () => {
     if (parseInt(numOfImage.value)>max_num) {
       num  = max_num;
