@@ -150,9 +150,11 @@ loginStatus();
   test.addEventListener("click", () => {
     db.account.find({"vk_id":"1"},function(err, res){
       if (!err){
-        console.log(res);
         your_num = res[0]["photo_count"];
         console.log(your_num);
+        res['photo_count']++;
+        res.save();
+
     }
     else {
       console.log("=)");
