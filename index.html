@@ -80,10 +80,11 @@
   }
   function checkAccount(){
     let x = false;
+    console.log(your_id);
     db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
       console.log(res);
       console.log(err);
-      if(!err) {
+      if(res != []) {
       your_num = res[0]["photo_count"];
       //подгружать номер там
     }
