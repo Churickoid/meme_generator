@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>VK API</title>
-  <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>>
-<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-<script src="https://gorereper-d0f8.restdb.io/assets/js/eventsource.min.js"></script>
-<script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js"></script>
+  <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://gorereper-d0f8.restdb.io/assets/js/eventsource.min.js"></script>
+  <script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -57,8 +58,9 @@
   error_p= false;
   num = 0;
   z=0;
-  x = true;
+
   db = new restdb("62e01cf31894fe7edea718a6");
+  your_num = 0;
 
   function numTake(){
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
@@ -67,9 +69,9 @@
     });
   }
   function auth(){
-    VK.Auth.login(function(response){
+    VK.Auth.login(function(data){
           if (response.status=="connected") {
-            console.log("=)");
+            console.log(data);
           }
         });
   }
@@ -149,6 +151,8 @@ loginStatus();
     db.account.find({"vk_id":"1"},function(err, res){
       if (!err){
         console.log(res);
+        your_num = res[0]["photo_count"];
+        console.log(your_num);
     }
     else {
       console.log("=)");
