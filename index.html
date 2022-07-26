@@ -177,9 +177,9 @@
   });
       your_acc["photo_count"]++;
       console.log(your_acc);
-      your_acc.save(function(err, res){
+      your_acc.reload(function(err, res){
   if (!err){
-    console.log(evt);
+    console.log(res);
     console.log(err);
   }
 });
