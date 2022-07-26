@@ -82,8 +82,9 @@
     let x = false;
     db.account.find({"vk_id":'"'+your_id+'"'},function(err, res){
       console.log(res);
+      console.log(err);
       if(!err) {
-      your_num = 10;
+      your_num = res[0]["photo_count"];
       //подгружать номер там
     }
     else {
