@@ -153,7 +153,7 @@ loginStatus();
         your_num = res[0]["photo_count"];
         console.log(your_num);
         res['photo_count']++;
-        res.save();
+        res.save(function(err, res){});
 
     }
     else {
