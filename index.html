@@ -177,10 +177,13 @@
   });
       your_acc["photo_count"]++;
       console.log(your_acc);
-      your_acc.on("PUT", function(err, evt){
-console.log(evt);
-      });
-    }
+      your_acc.save(function(err, res){
+  if (!err){
+    console.log(evt);
+    console.log(err);
+  }
+});
+}
     imageTake();
     numOfImage.value = num;
 
