@@ -80,11 +80,12 @@
   function checkAccount(){
     your_acc = new db.account({"vk_id":your_id, "photo_count":0});
     your_acc.save(function(error, res){
-      console.log(error);
+      console.log("1");
     });
     db.account.find({"vk_id":your_id},function(err, res){
           _id = res[0]["_id"];
           your_num = res[0]["photo_count"];
+          console.log("2");
         });
   }
   function loginStatus(){
