@@ -74,10 +74,9 @@
       if (data.status=="connected") {
         your_id= data.session["user"]["id"];
         console.log(your_id);
-        console.log("ПИВ");
+        checkAccount();
       }
     });
-    console.log("КО");
   }
   function checkAccount(){
     your_acc = new db.account({"vk_id":your_id, "photo_count":0});
