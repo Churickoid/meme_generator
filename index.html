@@ -187,6 +187,8 @@
 
   function addRating(rate){
     if (num==your_num){
+      num++;
+      your_num++;
     db.photos.find({"photo_id":num},function(err, res){
       if (res.length != 0) {
         res[0]["count"]++;
@@ -211,8 +213,6 @@
     }
 
   });
-  num++;
-  your_num= num +1;
   imageTake();
   numOfImage.value = num;
   }
