@@ -93,10 +93,10 @@
           database_id = res[0]["_id"];
           your_num = res[0]["photo_count"];
           console.log(num);
+          localStorage["vk_id"]= your_id;
+          localStorage["database_id"] = database_id;
         });
         numTake();
-        localStorage["vk_id"]= your_id;
-        localStorage["database_id"] = database_id;
   }
 
   function numTake(){
@@ -110,10 +110,10 @@
     VK.Auth.getLoginStatus( function(data) {
       if (data.status == "connected") {
         your_id = parseInt(localStorage.getItem("vk_id"));
-        database_id = localStorage.getItem("database_id");
+        database_id = localStorage["database_id"];
         numTake();
         db.account.getById(database_id,function(err, res){
-              console.log(res);
+              num = res["photo_res"]
         });
         console.log(your_id);
         console.log(database_id);
@@ -193,7 +193,7 @@
         console.log(res);
         // photo_res["count"]++;
         // photo_res["sum"]+=rate;
-        // photores.save(function(error, res){});
+        // photo_res.save(function(error, res){});
       }
       else {
         console.log(err);
