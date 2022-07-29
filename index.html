@@ -183,6 +183,7 @@
 
 
   function addRating(rate){
+    console.log(find)
     db.photos.find({"id": "'"+num+"'"},function(err, res){
       if (!err) {
         photo_res = res;
@@ -230,7 +231,6 @@
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
-          res["vk_id"]=num;
           res.save(function(err, res){
             if (!err){
         console.log(res);
