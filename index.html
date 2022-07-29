@@ -12,7 +12,6 @@
 </head>
 <body>
   <button type="button" class="sign">Sign In</button>
-  <button type="button" id="test">test</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
     <div class="content">
@@ -42,7 +41,6 @@
     apiId: 8221134
   });
   const sign = document.querySelector(".sign");
-  const test = document.getElementById("test");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
@@ -186,7 +184,7 @@
 
 
   function addRating(rate){
-    db.photos.find({"id":num},function(err, res){
+    db.photos.find({"photo_id":num},function(err, res){
       if (!err) {
         photo_res = res;
         console.log(photo_res);
@@ -234,6 +232,7 @@
       num = 0;
     }
     if (num>your_num){
+      your_num++;
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
