@@ -24,13 +24,21 @@
       <button type="button" id="previous">Previous</button>
     </div>
   </div>
+  <ul class="rate_panel">
+    <li id="1" class="rating">1</li>
+    <li id="2" class="rating">2</li>
+    <li id="3" class="rating">3</li>
+    <li id="4" class="rating">4</li>
+    <li id="5" class="rating">5</li>
+  </ul>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
   </div>
 
+
   <script type="text/javascript">
   VK.init({
-    apiId: 8221134
+    apiId: 8221134;
   });
   const sign = document.querySelector(".sign");
   const test = document.getElementById("test");
@@ -41,6 +49,12 @@
   const next = document.getElementById("next");
   const previous = document.getElementById("previous");
   const numOfImage = document.getElementById("numOfImage");
+
+  const rate1 = document.getElementById("1");
+  const rate2 = document.getElementById("2");
+  const rate3 = document.getElementById("3");
+  const rate4 = document.getElementById("4");
+  const rate5 = document.getElementById("5");
 
   const rand = document.getElementById("rand");
   randValue = false;
@@ -54,20 +68,13 @@
 
   max_num=10;
 
-  error_p= false;
   num = 0;
   z=0;
 
   db = new restdb("62e01cf31894fe7edea718a6");
   your_num = 0;
   your_id = 0;
-  _id = "";
-  function numTake(){
-    VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
-      max_num = data.response['items'][0]['id']-first_idImage;
-      numOfImage.max = max_num;
-    });
-  }
+  database_id = "";
   function auth(){
     VK.Auth.login(function(data){
       if (data.status=="connected") {
@@ -80,22 +87,39 @@
   function checkAccount(){
     your_acc = new db.account({"vk_id":your_id, "photo_count":0});
     your_acc.save(function(error, res){
-      console.log("1");
     });
     db.account.find({"vk_id":your_id},function(err, res){
-          _id = res[0]["_id"];
+          database_id = res[0]["_id"];
           your_num = res[0]["photo_count"];
-          console.log("2");
+          num = your_num;
         });
+        numTake();
+        localStorage.setItem("vk_id",your_id);
+        localStorage.setItem("database_id", database_id);
   }
-  function loginStatus(){
-    VK.Auth.getLoginStatus( function(data) {
-      console.log(data);
+
+  function numTake(){
+    VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
+      max_num = data.response['items'][0]['id']-first_idImage;
+      numOfImage.max = max_num;
     });
   }
+
+  function loginStatus(){
+    VK.Auth.getLoginStatus( function(data) {
+      if (data.status == "connected") {
+        your_id = parseInt(localStorage.getItem("vk_id"));
+        database_id = localStorage.getItem("database_id");
+        numTake();
+
+        //убрать авторизация
+      }
+    });
+  }
+
   function phraseTake(num,error = false){
     if (error) {
-      phrase.textContent = "No ID? ;-;"
+      phrase.textContent = "No ID? ;-;";
     }
     else {
       this_idPhrase = first_idPhrase + num;
@@ -151,12 +175,42 @@
     });
   }
 
-  numTake();
   loginStatus();
   //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
+
+
+
+  function addRating(rate){
+    db.photos.find({"id":num},function(err, res){
+      if (!err) {
+        res[0]["count"]++;
+        res[0]["photo_count"]+=rate;
+        res[0].save(function(error, res){});
+      }
+      else {
+        console.log(err);
+      }
+      });
+  }
+
+  rate1.addEventListener("click", () => {
+    addRating(1);
+  });
+  rate2.addEventListener("click", () => {
+    addRating(2);
+  });
+  rate3.addEventListener("click", () => {
+    addRating(3);
+  });
+  rate4.addEventListener("click", () => {
+    addRating(4);
+  });
+  rate5.addEventListener("click", () => {
+    addRating(5);
+  });
+
   sign.addEventListener("click", () => {
     auth();
-    numTake();
   });
 
   next.addEventListener("click", () => {
@@ -169,7 +223,7 @@
     }
     if (num>your_num){
       your_num;
-      db.account.getById(_id, function(err, res){
+      db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
           res.save(function(err, res){
