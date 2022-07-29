@@ -186,13 +186,13 @@
 
   function addRating(rate){
     if (num==your_num){
-    db.photos.find({"photo_id":String(num)},function(err, res){
+    db.photos.find({"photo_id":num},function(err, res){
       console.log(res);
       if (res.length != 0) {
         res[0]["count"]++;
         res[0]["sum"]+=rate;
         res[0]["rating"] = res[0]["sum"]/res[0]["count"]
-        res[0].reload(function(error, res){});
+        res[0].save(function(error, res){});
       }
       else {
         let new_photo = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
