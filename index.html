@@ -111,10 +111,11 @@
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage.getItem("database_id");
         numTake();
-        db.account.find({"vk_id":your_id},function(err, res){
-              num = res[0]["photo_count"];
+        db.account.getById(database_id,function(err, res){
+              num = res["photo_count"];
+              console.log(res["_id"]==database_id);
               console.log(num);
-            });
+        });
         console.log(your_id);
         console.log(database_id);
         //убрать авторизация
@@ -186,7 +187,6 @@
 
 
   function addRating(rate){
-    console.log(num)
     db.photos.find({"id":num},function(err, res){
       if (!err) {
         photo_res = res;
@@ -234,7 +234,7 @@
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
-          res["vk_id"]=your_id;
+          res[""]
           res.save(function(err, res){
             if (!err){
         console.log(res);
