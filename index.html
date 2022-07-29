@@ -92,6 +92,7 @@
           database_id = res[0]["_id"];
           your_num = res[0]["photo_count"];
           num = your_num;
+          console.log(res);
         });
         numTake();
         localStorage.setItem("vk_id",your_id);
@@ -184,6 +185,7 @@
   function addRating(rate){
     db.photos.find({"id":num},function(err, res){
       if (!err) {
+        photores
         res[0]["count"]++;
         res[0]["photo_count"]+=rate;
         res[0].save(function(error, res){});
