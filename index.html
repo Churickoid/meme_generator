@@ -185,10 +185,10 @@
   function addRating(rate){
     db.photos.find({"id":num},function(err, res){
       if (!err) {
-        photores
-        res[0]["count"]++;
-        res[0]["photo_count"]+=rate;
-        res[0].save(function(error, res){});
+        photores = res[0];
+        photores["count"]++;
+        photores["photo_count"]+=rate;
+        photores.save(function(error, res){});
       }
       else {
         console.log(err);
