@@ -197,11 +197,7 @@
         res[0] = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
       }
       res[0].save(function(error, ses){
-        num++;
-        your_num++;
         console.log(ses);
-        imageTake();
-        numOfImage.value = num;
         db.account.getById(database_id, function(err, res){
         if (!err){
             res["photo_count"]=num;
@@ -216,6 +212,10 @@
       });
   });
   }
+  num++;
+  your_num++;
+  imageTake();
+  numOfImage.value = num;
   }
 
   rate1.addEventListener("click", () => {
