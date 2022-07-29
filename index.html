@@ -198,24 +198,14 @@
       }
       res[0].save(function(error, ses){
         console.log(ses);
-        db.account.getById(database_id, function(err, res){
-        if (!err){
-            res["photo_count"]=num;
-            res.save(function(err, res){
-              if (!err){
-          console.log(res);
-          }
-
-      });
-      }
-    });
+        num++;
+        your_num++;
+        imageTake();
+        numOfImage.value = num;
       });
   });
   }
-  num++;
-  your_num++;
-  imageTake();
-  numOfImage.value = num;
+  
   }
 
   rate1.addEventListener("click", () => {
