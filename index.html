@@ -111,7 +111,8 @@
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage.getItem("database_id");
         numTake();
-
+        console.log(your_id);
+        console.log(database_id);
         //убрать авторизация
       }
     });
@@ -226,6 +227,7 @@
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
+          res["vk_id"]=num;
           res.save(function(err, res){
             if (!err){
         console.log(res);
