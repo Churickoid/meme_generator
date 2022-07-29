@@ -207,12 +207,12 @@
           res.save(function(err, res){
             if (!err){
         console.log(res);
+        imageTake();
+        numOfImage.value = num;
         }
 
     });
     }
-    imageTake();
-    numOfImage.value = num;
   });
   }
   }
