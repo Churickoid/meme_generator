@@ -192,7 +192,7 @@
         res[0].save(function(error, res){});
       }
       else {
-        let new_photo = new db.account({"photo_id":num,"count":1, "sum":rate, "rating":rate});
+        let new_photo = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
         new_photo.save(function(error, res){});
       }
       });
