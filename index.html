@@ -191,7 +191,7 @@
         res[0]["count"]++;
         res[0]["sum"]+=rate;
         res[0]["rating"] = res[0]["sum"]/res[0]["count"]
-        res[0].save(function(error, res){});
+        res[0].reload(function(error, res){});
       }
       else {
         let new_photo = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
@@ -211,7 +211,7 @@
   your_num++;
   num++;
   imageTake();
-  numOfImage.value = your_num;
+  numOfImage.value = num;
   }
   }
 
