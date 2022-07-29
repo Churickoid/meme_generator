@@ -192,18 +192,15 @@
         res[0]["count"]++;
         res[0]["sum"]+=rate;
         res[0]["rating"] = res[0]["sum"]/res[0]["count"]
-        res[0].save(function(error, res){
-          imageTake();
-          numOfImage.value = num;
-        });
       }
       else {
-        let new_photo = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
-        new_photo.save(function(error, res){
-          imageTake();
-          numOfImage.value = num;
-        });
+        res[0] = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
       }
+      res[0].save(function(error, ses){
+        console.log(ses);
+        imageTake();
+        numOfImage.value = num;
+      });
       });
       num++;
       your_num++;
