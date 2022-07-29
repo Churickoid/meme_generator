@@ -186,11 +186,10 @@
   function addRating(rate){
     db.photos.find({"photo_id":String(num)},function(err, res){
       if (res.length != 0) {
-        let photo_res = res;
-        photo_res[0]["count"]++;
-        photo_res[0]["sum"]+=rate;
-        photo_res[0]["rating"] = photo_res[0]["sum"]/photo_res[0]["count"]
-        photo_res.save(function(error, res){});
+        res[0]["count"]++;
+        res[0]["sum"]+=rate;
+        res[0]["rating"] = photo_res[0]["sum"]/photo_res[0]["count"]
+        res.save(function(error, res){});
       }
       else {
         let new_photo = new db.account({"photo_id":num,"count":1, "sum":rate, "rating":rate});
