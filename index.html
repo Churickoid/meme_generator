@@ -12,6 +12,7 @@
 </head>
 <body>
   <button type="button" class="sign">Sign In</button>
+  <button type="button" id="test">test</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
     <div class="content">
@@ -94,8 +95,8 @@
           console.log(num);
         });
         numTake();
-        localStorage.setItem("vk_id",your_id);
-        localStorage.setItem("database_id", database_id);
+        localStorage["vk_id"]= your_id;
+        localStorage["database_id"] = database_id;
   }
 
   function numTake(){
@@ -112,9 +113,7 @@
         database_id = localStorage.getItem("database_id");
         numTake();
         db.account.getById(database_id,function(err, res){
-              num = res["photo_count"];
-              console.log(res["_id"]==database_id);
-              console.log(num);
+              console.log(res);
         });
         console.log(your_id);
         console.log(database_id);
@@ -201,6 +200,10 @@
       }
       });
   }
+
+  test.addEventListener("click", () => {
+    localStorage.clear();
+  });
 
   rate1.addEventListener("click", () => {
     addRating(1);
