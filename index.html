@@ -113,7 +113,7 @@
         database_id = localStorage["database_id"];
         numTake();
         db.account.getById(database_id,function(err, res){
-              num = res["photo_res"]
+              console.log(res);
         });
         console.log(your_id);
         console.log(database_id);
@@ -237,7 +237,6 @@
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
-          res[""]
           res.save(function(err, res){
             if (!err){
         console.log(res);
