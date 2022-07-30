@@ -190,7 +190,7 @@
     db.photos.getById("62e475bce78d4f740002ec44",function(err, res){
         res["count"]++;
         res["sum"]+=rate;
-        res["rating"] = res[0]["sum"]/res[0]["count"]
+        res["rating"] = res["sum"]/res["count"]
         res.reload(function(error, ses){
         console.log(ses);
         num++;
