@@ -90,7 +90,9 @@
           console.log(num);
           localStorage["vk_id"]= your_id;
           localStorage["database_id"] = database_id;
-        });
+          localStorage["photo_num"] = your_num;
+            });
+
         numTake();
   }
 
@@ -107,11 +109,6 @@
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage["database_id"];
         numTake();
-        if (isNaN(localStorage["database_id"])) {
-          db.account.getById(database_id,function(err, res){
-                localStorage["database_id"] = your_num;
-          });
-        }
         your_num = parseInt(localStorage.getItem("photo_num"));
         num = your_num;
         imageTake();
