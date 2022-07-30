@@ -187,16 +187,11 @@
 
   function addRating(rate){
     if (num==your_num){
-    db.photos.find({"photo_id":num},function(err, res){
-      if (res.length != 0) {
-        res[0]["count"]++;
-        res[0]["sum"]+=rate;
-        res[0]["rating"] = res[0]["sum"]/res[0]["count"]
-      }
-      else {
-        res[0] = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
-      }
-      res[0].reload(function(error, ses){
+    db.photos.getById("62e475bce78d4f740002ec44",function(err, res){
+        res["count"]++;
+        res["sum"]+=rate;
+        res["rating"] = res[0]["sum"]/res[0]["count"]
+        res.reload(function(error, ses){
         console.log(ses);
         num++;
         your_num++;
@@ -212,7 +207,7 @@
 //         if (!err){
 //     console.log(res);
 //     }
-// 
+//
 // });
 // }
 // });
