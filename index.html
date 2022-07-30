@@ -187,22 +187,23 @@
 
   function addRating(rate){
     if (num==your_num){
+      let test;
+      your_num++;
     db.photos.find({"photo_id":num},function(err, res){
       if (res.length != 0) {
-        res[0]["count"]++;
-        res[0]["sum"]+=rate;
-        res[0]["rating"] = res[0]["sum"]/res[0]["count"]
+        test = res[0];
+        test["count"]++;
+        test["sum"]+= rate;
+        test["rating"] = test["sum"]/test["count"]
       }
       else {
-        res[0] = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
+        test = new db.photos({"photo_id":num,"count":1, "sum":rate, "rating":rate});
       }
-      res[0].save(function(error, ses){
+      test.save(function(error, ses){
         console.log(ses);
-        num++;
-        your_num++;
-        imageTake();
-        numOfImage.value = num;
       });
+      imageTake();
+      numOfImage.value = num;
   });
   }
 //   db.account.getById(database_id, function(err, res){
