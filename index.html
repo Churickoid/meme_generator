@@ -202,23 +202,22 @@
       test.save(function(error, ses){
         console.log(ses);
       });
-
+      num++;
+      imageTake();
+      numOfImage.value = num;
   });
-  num++;
-  imageTake();
-  numOfImage.value = num;
   }
-//   db.account.getById(database_id, function(err, res){
-//   if (!err){
-//       res["photo_count"]=num;
-//       res.save(function(err, res){
-//         if (!err){
-//     console.log(res);
-//     }
-//
-// });
-// }
-// });
+  db.account.getById(database_id, function(err, res){
+  if (!err){
+      res["photo_count"]=num;
+      res.save(function(err, res){
+        if (!err){
+    console.log(res);
+    }
+
+});
+}
+});
   }
 
   rate1.addEventListener("click", () => {
