@@ -107,7 +107,7 @@
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage["database_id"];
         numTake();
-        if (localStorage["database_id"]== "") {
+        if (isNaN(localStorage["database_id"])) {
           db.account.getById(database_id,function(err, res){
                 localStorage["database_id"] = your_num;
           });
