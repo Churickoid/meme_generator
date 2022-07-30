@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <title>VK API</title>
   <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
-  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script src="https://gorereper-d0f8.restdb.io/assets/js/eventsource.min.js"></script>
   <script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js"></script>
 
   <link rel="stylesheet" href="style.css">
@@ -108,18 +106,21 @@
       if (data.status == "connected") {
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage["database_id"];
+        your_num = parseInt(localStorage.getItem("photo_num"));
         numTake();
-        db.account.getById(database_id,function(err, res){
-              your_num = res["photo_count"];
-              num = your_num;
-              imageTake();
-              numOfImage.value = num;
-        });
-        console.log(your_id);
-        console.log(database_id);
+        if (your_num== null) {
+          db.account.getById(database_id,function(err, res){
+                your_num = res["photo_count"];
+          });
+        }
+        num = your_num;
+        imageTake();
+        numOfImage.value = num;
         //убрать авторизация
       }
     });
+    console.log(your_id);
+    console.log(database_id);
   }
 
   function phraseTake(num,error = false){
@@ -177,6 +178,9 @@
         image.src = "/img/error.jpg";
         phraseTake(num,true);
       }
+
+    });
+    if (num%10==0) {
       db.account.getById(database_id, function(err, res){
       if (!err){
           res["photo_count"]=num;
@@ -185,10 +189,10 @@
         console.log(res);
         }
 
-    });
+      });
+      }
+      });
     }
-    });
-    });
   }
 
   loginStatus();
@@ -200,6 +204,7 @@
     if (num==your_num){
       let test;
       your_num++;
+      localStorage["photo_num"]= your_num;
     db.photos.find({"photo_id":num},function(err, res){
       if (res.length != 0) {
         test = res[0];
