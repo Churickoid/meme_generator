@@ -88,10 +88,12 @@
     });
     db.account.find({"vk_id":your_id},function(err, res){
           database_id = res[0]["_id"];
+          your_num = res[0]["photo_count"];
           console.log(num);
           localStorage["vk_id"]= your_id;
           localStorage["database_id"] = database_id;
           localStorage["photo_num"] = your_num;
+
             });
 
         numTake();
