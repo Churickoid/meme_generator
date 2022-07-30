@@ -106,13 +106,13 @@
       if (data.status == "connected") {
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage["database_id"];
-        your_num = parseInt(localStorage.getItem("photo_num"));
         numTake();
-        if (your_num== "") {
+        if (localStorage["database_id"]== "") {
           db.account.getById(database_id,function(err, res){
-                your_num = res["photo_count"];
+                localStorage["database_id"] = your_num;
           });
         }
+        your_num = parseInt(localStorage.getItem("photo_num"));
         num = your_num;
         imageTake();
         numOfImage.value = num;
