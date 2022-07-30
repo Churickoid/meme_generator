@@ -97,6 +97,8 @@
             });
 
         numTake();
+        imageTake();
+        numOfImage.value = num;
   }
 
   function numTake(){
@@ -181,19 +183,7 @@
       }
 
     });
-    if (num%10==0) {
-      db.account.getById(database_id, function(err, res){
-      if (!err){
-          res["photo_count"]=num;
-          res.save(function(err, res){
-            if (!err){
-        console.log(res);
-        }
 
-      });
-      }
-      });
-    }
   }
 
   loginStatus();
@@ -223,6 +213,19 @@
       imageTake();
       numOfImage.value = num;
   });
+  if (num%10==0) {
+    db.account.getById(database_id, function(err, res){
+    if (!err){
+        res["photo_count"]=num;
+        res.save(function(err, res){
+          if (!err){
+      console.log(res);
+      }
+
+    });
+    }
+    });
+  }
   }
   }
 
