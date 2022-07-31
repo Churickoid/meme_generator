@@ -11,7 +11,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button type="button" class="sign">Sign In</button>
+  <div class="auth_menu">
+  <div class="auth_cont">
+  <p class="auth_text">Для работы сайта необходимо авторизоваться в VK</p>
+  <div class="auth_butt">
+
+  <p class="vk_text"><img src="img/vk_logo.png" class="vk_logo">войти</p>
+  </div>
+  </div>
+  </div>
+  <button type="button" class="headbutt">Raiting</button>
+  <button type="button" class="headbutt">Free</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
     <div id="content">
@@ -19,9 +29,10 @@
       <p class="phrase">Фраза</p>
     </div>
     <div class="panel_page">
-      <button type="button" id="next">Next</button>
-      <input type="number" id="numOfImage" value="0" min="0">
       <button type="button" id="previous">Previous</button>
+      <input type="number" id="numOfImage" value="0" min="0">
+      <button type="button" id="next">Next</button>
+      <button type="button" id="save">Save</button>
     </div>
   </div>
   <ul class="rate_panel">
@@ -33,7 +44,6 @@
   </ul>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
-    <button type="button" id="screenshot">Screenshot</button>
   </div>
 
 
@@ -41,7 +51,8 @@
   VK.init({
     apiId: 8221134
   });
-  const sign = document.querySelector(".sign");
+  const authorization = document.querySelector(".auth_butt");
+  const login_screen = document.querySelector(".auth_menu");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
@@ -58,8 +69,9 @@
 
   const rand = document.getElementById("rand");
   const screenshot = document.getElementById("screenshot");
-  randValue = false;
 
+  randValue = false;
+  ratingMode = true;
 
 
   const ownerImage = 514918087;
@@ -104,6 +116,7 @@
         numTake();
         imageTake();
         numOfImage.value = num;
+        login_screen.style.display = "none";
   }
 
   function numTake(){
@@ -115,27 +128,20 @@
 
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
-      if (data.status == "connected") {
+      if (data.status == "connected" && your_id!=0) {
         your_id = parseInt(localStorage.getItem("vk_id"));
-        database_id = localStorage["database_id"];
-        numTake();
+        database_id = localStorage.getItem("database_id");
         your_num = parseInt(localStorage.getItem("photo_num"));
         num = your_num;
+        numTake();
         imageTake();
         numOfImage.value = num;
-        //убрать авторизация
+        login_screen.style.display = "none";
       }
     });
-    console.log(your_id);
-    console.log(your_num);
-    console.log(database_id);
   }
 
-  function phraseTake(num,error = false){
-    if (error) {
-      phrase.textContent = "No ID? ;-;";
-    }
-    else {
+  function phraseTake(num){
       this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
         try {
@@ -163,7 +169,6 @@
           }
         }
       });
-    }
   }
   function imageTake(){
     this_idImage = first_idImage + num;
@@ -184,7 +189,7 @@
       }
       else if(data.error['error_code']==200) {
         image.src = "/img/error.jpg";
-        phraseTake(num,true);
+        phrase.textContent = "No ID? ;-;";
       }
 
     });
@@ -250,9 +255,7 @@
     addRating(5);
   });
 
-  sign.addEventListener("click", () => {
-    auth();
-  });
+  authorization.addEventListener("click", auth);
 
   next.addEventListener("click", () => {
     if (randValue) {
@@ -295,7 +298,7 @@
   rand.addEventListener("change", () => {
     randValue = !randValue;
   });
-  screenshot.addEventListener("click", () => {
+  save.addEventListener("click", () => {
     const content = document.querySelector('#content')
     html2canvas(content, {logging: true, letterRendering: 1, allowTaint: false, useCORS: true })
         .then(canvas => {
@@ -306,7 +309,7 @@
         .then(canvas => {
             const photo_download = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
             const a = document.createElement('a');
-            a.setAttribute('download', 'my-image.png');
+            a.setAttribute('download', 'funny_photo.png');
             a.setAttribute('href', photo_download);
             a.click();
             canvas.remove();
