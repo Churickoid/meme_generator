@@ -3,7 +3,7 @@
   position: relative;
   text-align: center;
 }
-.content{
+#content{
   margin: 0 auto;
   display: inline-block;
   padding:20px;

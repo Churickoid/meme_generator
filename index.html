@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>VK API</title>
   <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
-  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="js/html2canvas.js" type="text/javascript"></script>
+  <script src="js/jquery.js" type="text/javascript" type="text/javascript"></script>
   <script src="https://gorereper-d0f8.restdb.io/rest/_jsapi.js"></script>
 
   <link rel="stylesheet" href="style.css">
@@ -13,9 +14,9 @@
   <button type="button" class="sign">Sign In</button>
   <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
   <div class="center">
-    <div class="content">
-      <img src="" alt="photo" class="image">
-      <p class="phrase">четыре слова...</p>
+    <div id="content">
+      <img src="img/error.jpg" alt="photo" class="image">
+      <p class="phrase">Фраза</p>
     </div>
     <div class="panel_page">
       <button type="button" id="next">Next</button>
@@ -32,6 +33,7 @@
   </ul>
   <div class="panel_rand">
     <p>random?<input type="checkbox" id="rand"></p>
+    <button type="button" id="screenshot">Screenshot</button>
   </div>
 
 
@@ -55,7 +57,10 @@
   const rate5 = document.getElementById("5");
 
   const rand = document.getElementById("rand");
+  const screenshot = document.getElementById("screenshot");
   randValue = false;
+
+
 
   const ownerImage = 514918087;
   const album = 284198610;
@@ -290,7 +295,23 @@
   rand.addEventListener("change", () => {
     randValue = !randValue;
   });
-
+  screenshot.addEventListener("click", () => {
+    const content = document.querySelector('#content')
+    html2canvas(content)
+        .then(canvas => {
+            canvas.style.display = 'none';
+            document.body.appendChild(canvas);
+            return canvas;
+        })
+        .then(canvas => {
+            const photo_download = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+            const a = document.createElement('a');
+            a.setAttribute('download', 'my-image.png');
+            a.setAttribute('href', photo_download);
+            a.click();
+            canvas.remove();
+        });
+  });
 
 </script>
 </body>
