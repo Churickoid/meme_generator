@@ -297,7 +297,7 @@
   });
   screenshot.addEventListener("click", () => {
     const content = document.querySelector('#content')
-    html2canvas(content,{ letterRendering: 1, allowTaint : true})
+    html2canvas(content, {logging: true, letterRendering: 1, allowTaint: false, useCORS: true })
         .then(canvas => {
             canvas.style.display = 'none';
             document.body.appendChild(canvas);
