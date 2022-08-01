@@ -20,20 +20,34 @@
   </div>
   </div>
   </div>
-  <button type="button" class="headbutt">Raiting</button>
-  <button type="button" class="headbutt">Free</button>
-  <h1>СМЕШНЫЕ КАРТИНКИ =)</h1>
+  <header>
+    <div class="main_menu">
+      <div class="logo"> <p class="logo_image">0_o</p> <p class="logo_text">ржака200</p> </div>
+      <div class="header_elem"><img src="img/star.png" alt="" class="header_icon"><p>Рейтинг</p></div>
+      <div class="header_elem"><img src="img/photo.png" alt="" class="header_icon"><p>Свободная</p></div>
+      <div class="header_elem"><img src="img/trophy.png" alt="" class="header_icon"><p>Топ-100</p></div>
+    </div>
+
+
+  </header>
+
   <div class="center">
     <div id="content">
+      <div class="left">
+
+      </div>
       <img src="img/error.jpg" alt="photo" class="image">
-      <p class="phrase">Двойные стандарты</p>
+      <p class="phrase">Смешная фраза четыре слова</p>
     </div>
-    <div class="panel_page">
-      <button type="button" id="previous">Previous</button>
-      <input type="number" id="numOfImage" value="0" min="0">
-      <button type="button" id="next">Next</button>
-      <button type="button" id="save">Save</button>
+    <div class="right">
+
     </div>
+  </div>
+  <div class="panel_page">
+    <button type="button" id="previous">Previous</button>
+    <input type="number" id="numOfImage" value="0" min="0">
+    <button type="button" id="next">Next</button>
+    <button type="button" id="save">Save</button>
   </div>
   <ul class="rate_panel">
     <li> <button type="button" id="1" class="rating">1</button></li>
@@ -57,8 +71,8 @@
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
 
-  const next = document.getElementById("next");
-  const previous = document.getElementById("previous");
+  const next = document.querySelector(".right");
+  const previous = document.querySelector(".left");
   const numOfImage = document.getElementById("numOfImage");
 
   const rate1 = document.getElementById("1");
