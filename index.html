@@ -128,6 +128,7 @@
 
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
+      console.log(your_id);
       if (data.status == "connected" && your_id!=0) {
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage.getItem("database_id");
