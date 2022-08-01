@@ -26,7 +26,7 @@
   <div class="center">
     <div id="content">
       <img src="img/error.jpg" alt="photo" class="image">
-      <p class="phrase">Фраза</p>
+      <p class="phrase">Двойные стандарты</p>
     </div>
     <div class="panel_page">
       <button type="button" id="previous">Previous</button>
@@ -94,7 +94,6 @@
     VK.Auth.login(function(data){
       if (data.status=="connected") {
         your_id= data.session["user"]["id"];
-        console.log(your_id);
         checkAccount();
       }
     });
@@ -106,7 +105,6 @@
     db.account.find({"vk_id":your_id},function(err, res){
           database_id = res[0]["_id"];
           your_num = res[0]["photo_count"];
-          console.log(your_num);
           localStorage["vk_id"]= your_id;
           localStorage["database_id"] = database_id;
           localStorage["photo_num"] = your_num;
@@ -128,7 +126,6 @@
 
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
-      console.log(database_id);
       if (data.status == "connected" && localStorage.getItem("database_id")!="") {
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage.getItem("database_id");
