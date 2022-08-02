@@ -305,9 +305,9 @@
   next.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
-    }else if(num<your_num){
+    }else if(num<max_num){
       num = num+1;
-    }else if(num>your_num){
+    }else if(num>max_num){
       num = 0;
     }
 
@@ -335,7 +335,7 @@
       num = num-1;
     }
     else if(num==0){
-      num= your_num;
+      num= max_num;
     }
     imageTake();
     numOfImage.value = num;
@@ -455,6 +455,8 @@
     next.style.display = "none";
     header_rate.style.background = "#414141";
     header_free.style.background = "#222222";
+    num = your_num;
+    imageTake();
     mode = true;
   });
   header_free.addEventListener("click", () => {
