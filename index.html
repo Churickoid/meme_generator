@@ -236,9 +236,9 @@
         }
         image.src = size[n]['url'];
         console.log(image.src);
-        appearPhoto();
         z=0;
         phraseTake(num);
+        setTimeout(appearPhoto, 600);
       }
       else if(data.error['error_code']==200) {
         image.src = "/img/error.jpg";
