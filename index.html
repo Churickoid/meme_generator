@@ -128,10 +128,10 @@
 
   max_num=10;
 
-  num = 0;
   z=0;
 
   db = new restdb("62e01cf31894fe7edea718a6");
+  num = 0;
   your_num = 0;
   your_id = 0;
   database_id = "";
@@ -182,6 +182,13 @@
         login_screen.style.display = "none";
       }
     });
+    console.log(num);
+    console.log(your_num);
+    console.log(your_id);
+    console.log(database_id);
+    console.log(localStorage.getItem("vk_id"));
+    console.log(localStorage.getItem("photo_num"));
+    console.log(localStorage.getItem("database_id");
   }
 
   function phraseTake(num){
