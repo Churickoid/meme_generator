@@ -124,6 +124,9 @@ header{
 .header_elem:hover{
   background-color:#414141;
 }
+#header_rate{
+  background-color:#414141;
+}
 
 .center{
   position: relative;

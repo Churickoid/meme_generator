@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="back_elem">
-      <img  src="img/dice.png" id="rand" class="back_icon">
+      <img  src="img/dice.png" class="back_icon" id="dice">
     </div>
     </div>
     </div>
@@ -110,7 +110,7 @@
   const rate4 = document.getElementById("4");
   const rate5 = document.getElementById("5");
 
-  const rand = document.getElementById("rand");
+  const dice = document.getElementById("dice");
   const screenshot = document.getElementById("screenshot");
   const content = document.getElementById("content");
 
@@ -135,6 +135,7 @@
   your_num = 0;
   your_id = 0;
   database_id = "";
+  mode = true;
   function auth(){
     VK.Auth.login(function(data){
       if (data.status=="connected") {
@@ -340,8 +341,14 @@
     numOfImage.value = num;
   });
 
-  rand.addEventListener("change", () => {
+  dice.addEventListener("click", () => {
     randValue = !randValue;
+    if (randValue) {
+      dice.style.opacity = 1;
+    }
+    else{
+      dice.style.opacity = 0.5;
+    }
   });
 
   save.addEventListener("click", () => {
@@ -448,6 +455,7 @@
     next.style.display = "none";
     header_rate.style.background = "#414141";
     header_free.style.background = "#222222";
+    mode = true;
   });
   header_free.addEventListener("click", () => {
     rate_mode.style.display = "none";
@@ -456,6 +464,27 @@
     next.style.display = "inline";
     header_rate.style.background = "#222222";
     header_free.style.background = "#414141";
+    mode = false;
+  });
+  header_free.addEventListener("mouseover", () => {
+    if (mode==true) {
+      header_free.style.background = "#414141";
+    }
+  });
+  header_free.addEventListener("mouseout", () => {
+    if (mode==true) {
+    header_free.style.background = "#222222";
+  }
+  });
+  header_rate.addEventListener("mouseover", () => {
+    if (mode==false) {
+    header_rate.style.background = "#414141";
+  }
+  });
+  header_rate.addEventListener("mouseout", () => {
+  if (mode==false) {
+    header_rate.style.background = "#222222";
+  }
   });
 </script>
 </body>
