@@ -10,8 +10,8 @@ position: fixed;
 background-color: #141414;
 width: 100%;
 height: 100%;
-z-index: 2;
-display: none;
+z-index: 10;
+
 }
 .auth_cont{
   position: absolute;
@@ -131,13 +131,12 @@ header{
 }
 #content{
   border: 1px solid #333333;
-  padding: 4.5vh;
+  padding: 40px;
   display: inline-block;
   vertical-align: top;
   background: black;
   overflow: hidden;
   z-index: 1;
-  height: 90%;
   transition: 0.5s;
 }
 
@@ -149,60 +148,63 @@ header{
   bottom: 0; top: 0;
   margin-left: 0.5vh;
   position: absolute;
-  width: 20vh;
+  width: 140px;
   border-radius:0 20vh 20vh 0;
   height: 100%;
-  background-color: red;
-  opacity: 0.1;
   transition: 0.5s;
   z-index: 4;
+  opacity: 0;
 }
 .left:hover{
-  margin-top: 2vh;
-  margin-left: 1.5vh;
-  opacity: 0.4;
-  transform: rotate(-5deg) scale(0.95);
+background-color: rgba(150, 0, 230, 0.5);
 }
-.left_check:hover ~ #content {
-  transform: rotate(-5deg) scale(0.95);
-  }
-.right{
-   display: inline-block;
-  bottom: 0; top: 0;
-  position: absolute;
-  width: 20vh;
-  margin-left: 52.5vh;
-  border-radius:20vh 0 0 20vh;
-  height: 100%;
-  background-color: blue;
-  opacity: 0.1;
-  transition: 0.5s;
-  z-index: 4;
-  display: inline-block;
-}
+
 .right_check{
    display: inline-block;
 }
+.right{
+  bottom: 0; top: 0;
+  position: absolute;
+  width: 140px;
+  margin-left: -145px;
+  border-radius:20vh 0 0 20vh;
+  height: 100%;
+  transition: 0.5s;
+  z-index: 4;
+  vertical-align: middle;
+  opacity: 0;
+}
 .right:hover {
-  margin-top: 2vh;
-  margin-left: 51vh;
-  opacity: 0.4;
-  transform: rotate(5deg) scale(0.95);
+  background-color: rgba(150, 0, 230, 0.5);
   }
-.right_check:hover + #content {
-    transform: rotate(5deg) scale(0.95);
-    }
+
+i {
+  position: absolute;
+  top: 50%;
+  border: solid white;
+  border-width: 0 12px 12px 0;
+  display: inline-block;
+  padding: 12px;
+  translate: translate(0, -50%);
+}
+.right i{
+  transform: rotate(-45deg) ;
+  right:10px;
+}
+.left i{
+  transform: rotate(135deg) ;
+  left:10px;
+}
 .image{
-  max-width: 700px;
-  max-height: 500px;
-  height: 50vh;
+  max-width: 620px;
+  max-height: 480px;
   border: 4px solid white;
 }
 .phrase{
-  margin-top: 2vh;
-  margin-bottom: 1vh;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 5vh;
+  font-size: 34px;
   text-align: center;
   color:white;
 }

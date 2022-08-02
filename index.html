@@ -22,7 +22,7 @@
   </div>
   <header>
     <div class="main_menu">
-      <div class="logo"> <p class="logo_image">0_o</p> <p class="logo_text">ржач200</p> </div>
+      <div class="logo"> <p class="logo_image">0_o</p> <p class="logo_text">ржака200</p> </div>
       <div class="header_elem"><img src="img/star.png" alt="" class="header_icon"><p>Рейтинг</p></div>
       <div class="header_elem"><img src="img/photo.png" alt="" class="header_icon"><p>Свободная</p></div>
       <div class="header_elem"><img src="img/trophy.png" alt="" class="header_icon"><p>Топ-100</p></div>
@@ -34,24 +34,22 @@
   <div class="center">
     <div class="left_check">
       <div class="left">
-
+        <i></i>
       </div>
     </div>
-    <div class="right_check">
-      <div class="right">
 
-      </div>
-    </div>
     <div id="content">
       <img src="img/test.jpg" alt="photo" class="image">
       <p class="phrase">Смешная фраза четыре слова</p>
     </div>
-
+    <div class="right_check">
+    <div class="right">
+      <i></i>
+    </div>
+  </div>
   </div>
   <div class="panel_page">
-    <button type="button" id="previous">Previous</button>
     <input type="number" id="numOfImage" value="0" min="0">
-    <button type="button" id="next">Next</button>
     <button type="button" id="save">Save</button>
   </div>
   <ul class="rate_panel">
@@ -88,6 +86,8 @@
 
   const rand = document.getElementById("rand");
   const screenshot = document.getElementById("screenshot");
+  const content = document.getElementById("content");
+
 
   randValue = false;
   ratingMode = true;
@@ -161,6 +161,7 @@
   function phraseTake(num){
       this_idPhrase = first_idPhrase + num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
+        appearPhoto();
         try {
           console.log(data);
           if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
@@ -274,6 +275,13 @@
 
   authorization.addEventListener("click", auth);
 
+
+  function wanishPhoto(){
+    content.style.opacity = 0;
+  }
+  function appearPhoto(){
+    content.style.opacity = 1;
+  }
   next.addEventListener("click", () => {
     if (randValue) {
       num = Math.floor(Math.random() * max_num);
@@ -285,8 +293,9 @@
 
     imageTake();
     numOfImage.value = num;
-
+    wanishPhoto()
   });
+
   numOfImage.addEventListener("change", () => {
     if (parseInt(numOfImage.value)>max_num) {
       num  = max_num;
@@ -311,10 +320,13 @@
     }
     imageTake();
     numOfImage.value = num;
+    wanishPhoto()
   });
+
   rand.addEventListener("change", () => {
     randValue = !randValue;
   });
+
   save.addEventListener("click", () => {
     const content = document.querySelector('#content')
     html2canvas(content, {logging: true, letterRendering: 1, allowTaint: false, useCORS: true })
@@ -331,6 +343,38 @@
             a.click();
             canvas.remove();
         });
+  });
+
+
+
+  next.addEventListener("mouseover", () => {
+    content.style.transform = 'rotate(5deg) scale(0.95)';
+    previous.style.opacity = 1;
+    next.style.opacity = 1;
+  });
+  next.addEventListener("mouseout", () => {
+    content.style.transform = 'rotate(0deg) scale(1)';
+    previous.style.opacity = 0;
+    next.style.opacity = 0;
+  });
+  previous.addEventListener("mouseover", () => {
+    content.style.transform = 'rotate(-5deg) scale(0.95)';
+    previous.style.opacity = 1;
+    next.style.opacity = 1;
+  });
+  previous.addEventListener("mouseout", () => {
+    content.style.transform = 'rotate(0deg) scale(1)';
+    previous.style.opacity = 0;
+    next.style.opacity = 0;
+  });
+
+  content.addEventListener("mouseover", () => {
+    previous.style.opacity = 1;
+    next.style.opacity = 1;
+  });
+  content.addEventListener("mouseout", () => {
+    previous.style.opacity = 0;
+    next.style.opacity = 0;
   });
 
 </script>
