@@ -153,13 +153,13 @@
           localStorage["vk_id"]= your_id;
           localStorage["database_id"] = database_id;
           localStorage["photo_num"] = your_num;
+          numTake();
+          imageTake();
+          numOfImage.value = num;
+          login_screen.style.display = "none";
 
             });
 
-        numTake();
-        imageTake();
-        numOfImage.value = num;
-        login_screen.style.display = "none";
   }
 
   function numTake(){
@@ -181,14 +181,15 @@
         numOfImage.value = num;
         login_screen.style.display = "none";
       }
+      console.log(num);
+      console.log(your_num);
+      console.log(your_id);
+      console.log(database_id);
+      console.log(localStorage.getItem("vk_id"));
+      console.log(localStorage.getItem("photo_num"));
+      console.log(localStorage.getItem("database_id"));
     });
-    console.log(num);
-    console.log(your_num);
-    console.log(your_id);
-    console.log(database_id);
-    console.log(localStorage.getItem("vk_id"));
-    console.log(localStorage.getItem("photo_num"));
-    console.log(localStorage.getItem("database_id"));
+
   }
 
   function phraseTake(num){
