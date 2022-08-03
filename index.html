@@ -127,7 +127,7 @@
   const first_idImage = 457239127;
 
   const ownerPhrase= -37245324;
-  const first_idPhrase= 124;
+  const first_idPhrase= 1452;
 
   max_num=10;
 
@@ -211,7 +211,7 @@
   }
 
   function phraseTake(num){
-      this_idPhrase = first_idPhrase + num;
+      this_idPhrase = first_idPhrase - num;
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
         try {
           console.log(data);
@@ -221,28 +221,28 @@
             appearPhoto();
           }
           else if(z==0){
-            phraseTake(num+300+z);
+            phraseTake(num-300-z);
             z=100;
           }
           else {
-            phraseTake(num+z);
+            phraseTake(num-z);
           }
         }
         catch (e) {
           if(e instanceof TypeError && !data.error){
             if(z==0){
-              phraseTake(num+300+z);
+              phraseTake(num-300-z);
               z=100;
             }
             else {
-              phraseTake(num+z);
+              phraseTake(num-z);
             }
           }
         }
       });
   }
   function imageTake(){
-    this_idImage = first_idImage + num;
+    this_idImage = first_idImage - num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
       if(!data.error) {
         let height = 0;
