@@ -184,23 +184,30 @@
         database_id = localStorage.getItem("database_id");
         db.account.getById(database_id, function(err, res){
         if (!err){
+            login_screen.style.display = "none";
             if (localStorage.getItem("photo_num")>res["photo_count"]) {
               res["photo_count"]= localStorage.getItem("photo_num");
               res.save(function(err, res){});
             } else {
               localStorage["photo_num"]= res["photo_count"];
             }
+            your_num = parseInt(localStorage.getItem("photo_num"));
+            num = your_num;
+            numTake();
+            imageTake();
+            numOfImage.value = num;
+            console.log(localStorage.getItem("vk_id"));
+            console.log(localStorage.getItem("photo_num"));
+            console.log(localStorage.getItem("database_id"));
       }
-        your_num = parseInt(localStorage.getItem("photo_num"));
-        num = your_num;
-        numTake();
-        imageTake();
-        numOfImage.value = num;
-        login_screen.style.display = "none";
+      else {
+        login_screen.style.display = "inline";
+        authorization.style.display = "inline";
+      }
+
       });
     }
     });
-
   }
 
   function phraseTake(num){
