@@ -362,7 +362,9 @@
     }
     imageTake();
     numOfImage.value = num;
-
+    db.photos.find({"photo_id":num},function(err, res){
+      rating.innerHTML = res[0]["rating"];
+    });
   });
   previous.addEventListener("click", () => {
     if (randValue) {
@@ -375,6 +377,9 @@
     }
     imageTake();
     numOfImage.value = num;
+    db.photos.find({"photo_id":num},function(err, res){
+      rating.innerHTML = res[0]["rating"];
+    });
   });
 
   dice.addEventListener("click", () => {
@@ -503,6 +508,9 @@
     header_rate.style.background = "#222222";
     header_free.style.background = "#414141";
     mode = false;
+    db.photos.find({"photo_id":num},function(err, res){
+      rating.innerHTML = res[0]["rating"];
+    });
   });
   header_free.addEventListener("mouseover", () => {
     if (mode==true) {
