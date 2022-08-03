@@ -39,7 +39,7 @@
     </div>
 
     <div id="content">
-      <img src="img/test.jpg" alt="photo" class="image" onload="appearPhoto()">
+      <img src="img/test.jpg" alt="photo" class="image" onload="checkPhoto()">
       <p class="phrase">Смешная фраза четыре слова</p>
     </div>
     <div class="right_check">
@@ -136,6 +136,8 @@
   your_id = 0;
   database_id = "";
   mode = true;
+  photo_load = false;
+  phrase_load = false;
   function auth(){
     VK.Auth.login(function(data){
       if (data.status=="connected") {
@@ -200,6 +202,8 @@
           console.log(data);
           if(!data.response[0]['is_deleted'] && data.response[0]['text']!='') {
             phrase.textContent = data.response[0]['text'];
+            phrase_load = true;
+            appearPhoto();
           }
           else if(z==0){
             phraseTake(num+300+z);
@@ -239,6 +243,10 @@
         console.log(image.src);
         z=0;
         phraseTake(num);
+      }
+      else if(data.error['error_code']==200 && mode == true) {
+        num++;
+        imageTake();
       }
       else if(data.error['error_code']==200) {
         image.src = "/img/error.jpg";
@@ -295,12 +303,19 @@
 
   authorization.addEventListener("click", auth);
 
-
+  function checkPhoto(){
+    photo_load = true;
+    wanishPhoto();
+  }
   function wanishPhoto(){
     content.style.opacity = 0;
   }
   function appearPhoto(){
-    content.style.opacity = 1;
+    if (photo_load && phrase_load) {
+      content.style.opacity = 1;
+      photo_load = false;
+      phrase_load = false;
+    }
   }
   next.addEventListener("click", () => {
     if (randValue) {
