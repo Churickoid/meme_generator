@@ -221,21 +221,21 @@
             appearPhoto();
           }
           else if(z==0){
-            phraseTake(num-300-z);
+            phraseTake(num+300+z);
             z=100;
           }
           else {
-            phraseTake(num-z);
+            phraseTake(num+z);
           }
         }
         catch (e) {
           if(e instanceof TypeError && !data.error){
             if(z==0){
-              phraseTake(num-300-z);
+              phraseTake(num+300+z);
               z=100;
             }
             else {
-              phraseTake(num-z);
+              phraseTake(num+z);
             }
           }
         }
