@@ -40,7 +40,7 @@
 
     <div id="content">
       <img src="img/error.jpg" alt="photo" class="image" onload="checkPhoto()">
-      <p class="phrase">Смешная фраза четыре слова</p>
+      <p class="phrase">Пасхалка: Путин200</p>
     </div>
     <div class="right_check">
     <div class="right">
@@ -249,7 +249,8 @@
         phraseTake(num);
       }
       else if(data.error['error_code']==200 && mode == true) {
-        num++;
+        your_num++;
+        num = your_num;
         imageTake();
       }
       else if(data.error['error_code']==200) {
