@@ -175,22 +175,26 @@
   function loginStatus(){
     VK.Auth.getLoginStatus( function(data) {
       if (data.status == "connected" && localStorage.getItem("database_id")!="" && localStorage.getItem("database_id")!= null) {
+        authorization.style.display = "none";
         your_id = parseInt(localStorage.getItem("vk_id"));
         database_id = localStorage.getItem("database_id");
+        db.account.getById(database_id, function(err, res){
+        if (!err){
+            if (localStorage.getItem("photo_num")>res["photo_count"]) {
+              res["photo_count"]= localStorage.getItem("photo_num");
+              res.save(function(err, res){});
+            } else {
+              localStorage["photo_num"]= res["photo_count"];
+            }
+      }
         your_num = parseInt(localStorage.getItem("photo_num"));
         num = your_num;
         numTake();
         imageTake();
         numOfImage.value = num;
         login_screen.style.display = "none";
-      }
-      console.log(num);
-      console.log(your_num);
-      console.log(your_id);
-      console.log(database_id);
-      console.log(localStorage.getItem("vk_id"));
-      console.log(localStorage.getItem("photo_num"));
-      console.log(localStorage.getItem("database_id"));
+      });
+    }
     });
 
   }
@@ -285,6 +289,7 @@
       imageTake();
       numOfImage.value = num;
   });
+  if (num%10==0) {
     db.account.getById(database_id, function(err, res){
     if (!err){
         res["photo_count"]=num;
@@ -296,6 +301,7 @@
     });
     }
     });
+  }
   }
   }
 
