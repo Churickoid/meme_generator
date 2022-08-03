@@ -285,7 +285,6 @@
       imageTake();
       numOfImage.value = num;
   });
-  if (num%10==0) {
     db.account.getById(database_id, function(err, res){
     if (!err){
         res["photo_count"]=num;
@@ -297,7 +296,6 @@
     });
     }
     });
-  }
   }
   }
 
