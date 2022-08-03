@@ -40,7 +40,7 @@
 
     <div id="content">
       <img src="img/error.jpg" alt="photo" class="image" onload="checkPhoto()">
-      <p class="phrase">Пасхалка: Путин200</p>
+      <p class="phrase">Пасхалка: Путиноид2000</p>
     </div>
     <div class="right_check">
     <div class="right">
@@ -66,7 +66,7 @@
       <img src="img/5.png" id="5" class="rating">
     </div>
     <div class="back_elem">
-      <p class="id_text">ID: 0</p>
+      <p class="id_text">ID: 0/0</p>
     </div>
     </div>
     <div class="free">
@@ -76,7 +76,7 @@
           ID: <input type="number" id="numOfImage" value="0" min="0">
         </div>
         <div class="rating_value">
-          <p class="rating_text">4.32</p><img src="img/rating.png" class="rating_icon">
+          <p class="rating_text">...</p><img src="img/rating.png" class="rating_icon">
         </div>
     </div>
     <div class="back_elem">
@@ -88,6 +88,7 @@
   <script type="text/javascript">
   VK.init({
     apiId: 8221134
+    //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
   });
   const authorization = document.querySelector(".auth_butt");
   const login_screen = document.querySelector(".auth_menu");
@@ -114,6 +115,8 @@
   const screenshot = document.getElementById("screenshot");
   const content = document.getElementById("content");
 
+  const id_text = document.querySelector(".id_text");
+  const rating = document.querySelector(".rating_text");
 
   randValue = false;
   ratingMode = true;
@@ -169,6 +172,7 @@
     VK.Api.call('photos.get', {owner_id:ownerImage,album_id:album,rev:1,count:1,v:'5.131'}, function(data) {
       max_num = data.response['items'][0]['id']-first_idImage;
       numOfImage.max = max_num;
+      id_text.innerHTML = "ID: "+your_num+"/"+max_num;
     });
   }
 
@@ -263,16 +267,16 @@
   }
 
   loginStatus();
-  //access_token=194e5aa7194e5aa7194e5aa7c819332b691194e194e5aa77b9a1f6e0505b26b23ec71f8";
+
 
 
 
   function addRating(rate){
     if (num==your_num){
+      num++;
       wanishPhoto();
       let test;
-      your_num++;
-      localStorage["photo_num"]= your_num;
+      localStorage["photo_num"]= num;
     db.photos.find({"photo_id":num},function(err, res){
       if (res.length != 0) {
         test = res[0];
@@ -286,7 +290,6 @@
       test.save(function(error, ses){
         console.log(ses);
       });
-      num++;
       imageTake();
       numOfImage.value = num;
   });
@@ -317,9 +320,11 @@
   }
   function appearPhoto(){
     if (photo_load && phrase_load) {
+      your_num++;
       content.style.opacity = 1;
       photo_load = false;
       phrase_load = false;
+      id_text.innerHTML = "ID: "+your_num+"/"+max_num;
     }
   }
   next.addEventListener("click", () => {
@@ -330,9 +335,12 @@
     }else if(num>max_num){
       num = 0;
     }
-
+    rating.innerHTML = "...";
     imageTake();
     numOfImage.value = num;
+    db.photos.find({"photo_id":num},function(err, res){
+      rating.innerHTML = res[0]["rating"];
+    });
   });
 
   numOfImage.addEventListener("change", () => {
@@ -347,6 +355,7 @@
     }
     imageTake();
     numOfImage.value = num;
+
   });
   previous.addEventListener("click", () => {
     if (randValue) {
