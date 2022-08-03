@@ -242,7 +242,7 @@
       });
   }
   function imageTake(){
-    this_idImage = first_idImage - num;
+    this_idImage = first_idImage + num;
     VK.Api.call('photos.getById', {photos:ownerImage+'_'+this_idImage,v:'5.131'}, function(data) {
       if(!data.error) {
         let height = 0;
