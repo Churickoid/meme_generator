@@ -211,7 +211,7 @@
   }
 
   function phraseTake(num){
-      this_idPhrase = first_idPhrase - num;
+      this_idPhrase = first_idPhrase - (num%(first_idPhrase-100));
       VK.Api.call('wall.getById', {posts:ownerPhrase+'_'+this_idPhrase,v:'5.131'}, function(data) {
         try {
           console.log(data);
