@@ -346,7 +346,7 @@
     imageTake();
     numOfImage.value = num;
     db.photos.find({"photo_id":num},function(err, res){
-      rating.innerHTML = res[0]["rating"];
+      rating.innerHTML = res[0]["rating"].toFixed(2);
     });
   });
 
@@ -364,7 +364,7 @@
     imageTake();
     numOfImage.value = num;
     db.photos.find({"photo_id":num},function(err, res){
-      rating.innerHTML = res[0]["rating"];
+      rating.innerHTML = res[0]["rating"].toFixed(2);
     });
   });
   previous.addEventListener("click", () => {
@@ -380,7 +380,7 @@
     imageTake();
     numOfImage.value = num;
     db.photos.find({"photo_id":num},function(err, res){
-      rating.innerHTML = res[0]["rating"];
+      rating.innerHTML = res[0]["rating"].toFixed(2);
     });
   });
 
@@ -512,7 +512,7 @@
     mode = false;
     rating.innerHTML = "...";
     db.photos.find({"photo_id":num},function(err, res){
-      rating.innerHTML = res[0]["rating"];
+      rating.innerHTML = res[0]["rating"].toFixed(2);
     });
   });
   header_free.addEventListener("mouseover", () => {
