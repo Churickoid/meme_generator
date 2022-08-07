@@ -11,6 +11,7 @@ background-color: #141414;
 width: 100%;
 height: 100%;
 z-index: 10;
+
 }
 .auth_cont{
   position: absolute;
@@ -149,7 +150,6 @@ header{
 }
 .left{
   bottom: 0; top: 0;
-  margin-left: 0.5vh;
   position: absolute;
   width: 140px;
   border-radius:0 20vh 20vh 0;
@@ -190,15 +190,15 @@ i {
   border-width: 0 12px 12px 0;
   display: inline-block;
   padding: 12px;
-  translate: translate(0, -50%);
+
 }
 .right i{
-  transform: rotate(-45deg) ;
-  right:10px;
+  transform: rotate(-45deg) translate(0, -50%);
+  right:0;
 }
 .left i{
-  transform: rotate(135deg) ;
-  left:10px;
+  transform: rotate(135deg) translate(0, 50%);
+  left: 24px;
 }
 .image{
   max-width: 620px;
@@ -206,6 +206,7 @@ i {
   border: 4px solid white;
 }
 .phrase{
+  max-width: 600px;
   margin-top: 20px;
   margin-bottom: 10px;
   font-family: 'Times New Roman', Times, serif;
@@ -336,4 +337,32 @@ opacity: 1;
 .free{
   display: inline-block;
   display: none;
+}
+.table{
+text-align: center;
+display: none;
+}
+.position{
+  background-color: #222222;
+  border-bottom: 1px solid #333333;
+  font-size: 32px;
+  color: #9600e6;
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+  margin-left: auto; margin-right: auto;
+}
+.table_num{
+  display: inline-block;
+  width: 40px;
+  border-right: 1px solid #333333;
+}
+.table_id{
+  display: inline-block;
+  width: 120px;
+}
+.table_rate{
+  display: inline-block;
+  width: 120px;
+  border-left: 1px solid #333333;
 }

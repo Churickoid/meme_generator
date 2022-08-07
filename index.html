@@ -25,7 +25,7 @@
       <div class="logo"> <p class="logo_image">0_o</p> <p class="logo_text">ржач200</p> </div>
       <div class="header_elem" id="header_rate"><img src="img/star.png" alt="" class="header_icon"><p>Рейтинг</p></div>
       <div class="header_elem" id="header_free"><img src="img/photo.png" alt="" class="header_icon"><p>Свободная</p></div>
-      <div class="header_elem"><img src="img/trophy.png" alt="" class="header_icon"><p>Топ-100</p></div>
+      <div class="header_elem" id="header_top"><img src="img/trophy.png" alt="" class="header_icon"><p>Топ 100</p></div>
     </div>
 
 
@@ -48,10 +48,23 @@
     </div>
   </div>
   </div>
-  <div class="panel_page">
+
+<div class="table">
+  <div class="position">
+    <div class="table_num">
+      №
+    </div>
+    <div class="table_id">
+      ID
+    </div>
+    <div class="table_rate">
+      <img src="img/rating.png" class="rating_icon">
+    </div>
+
   </div>
 
 
+</div>
   <footer>
     <div class="panel">
     <div class="back_elem">
@@ -95,8 +108,13 @@
 
   const header_rate = document.getElementById("header_rate");
   const header_free = document.getElementById("header_free");
+  const header_top = document.getElementById("header_top");
+
   const free_mode = document.querySelector(".free");
   const rate_mode = document.querySelector(".rate");
+
+  const panel = document.querySelector(".panel");
+  const center = document.querySelector(".center");
 
   const image = document.querySelector(".image");
   const phrase = document.querySelector(".phrase");
@@ -118,6 +136,8 @@
   const id_text = document.querySelector(".id_text");
   const rating = document.querySelector(".rating_text");
 
+  const table = document.querySelector(".table");
+
   randValue = false;
   ratingMode = true;
 
@@ -138,9 +158,10 @@
   your_num = 0;
   your_id = 0;
   database_id = "";
-  mode = true;
+  mode = 1;
   photo_load = false;
   phrase_load = false;
+  table_check = true;
   function auth(){
     VK.Auth.login(function(data){
       if (data.status=="connected") {
@@ -259,7 +280,7 @@
         z=0;
         phraseTake(num);
       }
-      else if(data.error['error_code']==200 && mode == true) {
+      else if(data.error['error_code']==200 && mode == 1) {
         your_num++;
         num = your_num;
         imageTake();
@@ -498,43 +519,106 @@
     next.style.display = "none";
     header_rate.style.background = "#414141";
     header_free.style.background = "#222222";
+    header_top.style.background = "#222222";
     num = your_num;
     imageTake();
-    mode = true;
+    mode = 1;
+    panel.style.display = "inline";
+    center.style.display = "block";
+    table.style.display =  "none";
   });
-  header_free.addEventListener("click", () => {
+  header_free.addEventListener("click", headerFree);
+  function headerFree(){
     rate_mode.style.display = "none";
     free_mode.style.display = "inline";
     previous.style.display = "inline";
     next.style.display = "inline";
     header_rate.style.background = "#222222";
     header_free.style.background = "#414141";
-    mode = false;
+    header_top.style.background = "#222222";
+    mode = 2;
     rating.innerHTML = "...";
     db.photos.find({"photo_id":num},function(err, res){
       rating.innerHTML = res[0]["rating"].toFixed(2);
     });
-  });
-  header_free.addEventListener("mouseover", () => {
-    if (mode==true) {
-      header_free.style.background = "#414141";
-    }
-  });
-  header_free.addEventListener("mouseout", () => {
-    if (mode==true) {
-    header_free.style.background = "#222222";
+    panel.style.display = "inline";
+    center.style.display = "block";
+    table.style.display =  "none";
   }
-  });
   header_rate.addEventListener("mouseover", () => {
-    if (mode==false) {
+    if (mode!=1) {
     header_rate.style.background = "#414141";
   }
   });
   header_rate.addEventListener("mouseout", () => {
-  if (mode==false) {
+  if (mode!=1) {
     header_rate.style.background = "#222222";
   }
   });
+  header_free.addEventListener("mouseover", () => {
+if (mode!=2) {
+      header_free.style.background = "#414141";
+}
+  });
+  header_free.addEventListener("mouseout", () => {
+  if (mode!=2) {
+    header_free.style.background = "#222222";
+  }
+  });
+  header_top.addEventListener("mouseover", () => {
+if (mode!=3) {
+    header_top.style.background = "#414141";
+}
+  });
+  header_top.addEventListener("mouseout", () => {
+if (mode!=3) {
+header_top.style.background = "#222222";
+}
+  });
+
+  header_top.addEventListener("click", () => {
+    panel.style.display = "none";
+    center.style.display = "none";
+    table.style.display =  "inline";
+    header_rate.style.background = "#222222";
+    header_free.style.background = "#222222";
+    header_top.style.background = "#414141";
+    mode = 3;
+    if (table_check) {
+    OutTop();
+    }
+  });
+
+function OutTop(){
+db.account.find({"vk_id":your_id},{"$max":100,"$orderby":{"rating":-1,"name":1}} ,function(err, res){
+for (var i = 0; i < res.length; i++) {
+  let position = document.createElement('position');
+  position.classList.add('position');
+  if (i%2==0) {
+    position.style.background = "#282828";
+    position.style.color = "white";
+  }
+  else {
+    position.style.color = "#8142a3";
+  }
+  table.appendChild(position);
+  let table_num = position.appendChild(document.createElement('table_num'));
+  let table_id = position.appendChild(document.createElement('table_id'));
+  let table_rate = position.appendChild(document.createElement('table_rate'));
+  table_num.classList.add('table_num');
+  table_id.classList.add('table_id');
+  table_rate.classList.add('table_rate');
+  table_num.innerHTML = i;
+  table_id.innerHTML = res[i]["photo_id"];
+  table_rate.innerHTML = res[i]["rating"];
+}
+});
+table_check = false
+}
+function seeImage(){
+  num = 10;
+  headerFree();
+}
 </script>
 </body>
 </html>
