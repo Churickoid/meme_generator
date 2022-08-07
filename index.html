@@ -590,7 +590,7 @@ header_top.style.background = "#222222";
   });
 
 function OutTop(){
-db.account.find({},{"$max":100,"$orderby":{"rating":-1,"name":1}} ,function(err, res){
+db.photos.find({},{"$max":100,"$orderby":{"rating":-1,"name":1}} ,function(err, res){
 for (var i = 0; i < res.length; i++) {
   let position = document.createElement('position');
   position.classList.add('position');
