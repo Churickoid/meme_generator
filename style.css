@@ -366,3 +366,9 @@ display: none;
   width: 120px;
   border-left: 1px solid #333333;
 }
+.table_button{
+  position: absolute;
+  z-index: 10;
+  height:38px;
+  width: 280px;
+}

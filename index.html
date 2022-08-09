@@ -60,7 +60,8 @@
     <div class="table_rate">
       <img src="img/rating.png" class="rating_icon">
     </div>
-
+    <div class="table_button">
+    </div>
   </div>
 
 
@@ -162,6 +163,8 @@
   photo_load = false;
   phrase_load = false;
   table_check = true;
+
+  scroll = 0;
   function auth(){
     VK.Auth.login(function(data){
       if (data.status=="connected") {
@@ -544,6 +547,7 @@
     panel.style.display = "inline";
     center.style.display = "block";
     table.style.display =  "none";
+    numOfImage.value = num;
   }
   header_rate.addEventListener("mouseover", () => {
     if (mode!=1) {
@@ -584,11 +588,13 @@ header_top.style.background = "#222222";
     header_free.style.background = "#222222";
     header_top.style.background = "#414141";
     mode = 3;
+    scrollTo(0,scroll);
     if (table_check) {
     OutTop();
     }
   });
 
+id_list = [];
 function OutTop(){
 db.photos.find({},{"$max":100,"$orderby":{"rating":-1,"name":-1}} ,function(err, res){
 for (var i = 0; i < res.length; i++) {
@@ -605,16 +611,27 @@ for (var i = 0; i < res.length; i++) {
   let table_num = position.appendChild(document.createElement('table_num'));
   let table_id = position.appendChild(document.createElement('table_id'));
   let table_rate = position.appendChild(document.createElement('table_rate'));
+  let table_button = position.appendChild(document.createElement('table_button'));
+  table_button.id = i;
+  table_button.classList.add('table_button');
   table_num.classList.add('table_num');
   table_id.classList.add('table_id');
   table_rate.classList.add('table_rate');
   table_num.innerHTML = i+1;
   table_id.innerHTML = res[i]["photo_id"];
+  id_list.push(i);
   table_rate.innerHTML = res[i]["rating"].toFixed(2);
 }
 table_check = false
-});
+//});
 }
+
+table.addEventListener("click", function(e){
+num = id_list[e.target.id];
+scroll = window.pageYOffset;
+headerFree();
+imageTake();
+});
 
 </script>
 </body>
