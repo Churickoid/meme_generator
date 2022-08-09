@@ -619,7 +619,7 @@ for (var i = 0; i < res.length; i++) {
   table_rate.classList.add('table_rate');
   table_num.innerHTML = i+1;
   table_id.innerHTML = res[i]["photo_id"];
-  id_list.push(i);
+  id_list.push(res[i]["photo_id"]);
   table_rate.innerHTML = res[i]["rating"].toFixed(2);
 }
 table_check = false
