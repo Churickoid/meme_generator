@@ -1,7 +1,7 @@
 # Ржач200
-Сайт для оценки сгенерированных аглоритмом демотиваторов.
-Работает с помощью [VK API](https://dev.vk.com/reference) и [restdb](https://restdb.io/)
-[Сайт](https://developer.android.com/training/dependency-injection/manual)
+Сайт для оценки сгенерированных аглоритмом демотиваторов.<br>
+Работает с помощью [VK API](https://dev.vk.com/reference) и [restdb](https://restdb.io/).<br>
+[Сайт](https://developer.android.com/training/dependency-injection/manual).
 
 Принцип работы
 ---------------
@@ -18,7 +18,7 @@
 * Список лучших демотиваторов
 
 -----------
-<img src="screenshots/1.png" width="360"><img src="screenshots/2.png" width="360"> <img src="screenshots/3.png" width="360">
+<img src="screenshots/1.png" height="360"><img src="screenshots/2.png" height="360"> <img src="screenshots/3.png" height="360">
 
 
 
