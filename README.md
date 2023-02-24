@@ -1,7 +1,7 @@
 # Ржач200
 Сайт для оценки сгенерированных аглоритмом демотиваторов.<br>
 Работает с помощью [VK API](https://dev.vk.com/reference) и [restdb](https://restdb.io/).<br>
-[Ссылка на сайт](churickoid.github.io/meme_generator/).
+[Ссылка на сайт](https://churickoid.github.io/meme_generator/).
 
 Принцип работы
 ---------------
